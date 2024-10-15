@@ -1,0 +1,17 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assests/fonts/NotoSansJP-Regular.ttf",
+      "sha1": "29889f0dd1bfefbdfb9ae96caf509c609402d37c"
+    },
+    {
+      "path": "src/assests/fonts/RobotoMono-SemiBold.ttf",
+      "sha1": "3e27af4808640005903a8791831e78ef177189a2"
+    },
+    {
+      "path": "src/assests/fonts/Sono-Regular.ttf",
+      "sha1": "ffd538e5ac4dcfcdc565bd40872e0b693e97966f"
+    }
+  ]
+}
