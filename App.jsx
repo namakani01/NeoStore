@@ -14,10 +14,10 @@ const App = () => {
     // <MyTabs></MyTabs>
     // <SignupScreen></SignupScreen>
     // <LoginScreen></LoginScreen>
-    // <Stacknavigation></Stacknavigation>
+    <Stacknavigation></Stacknavigation>
     // <ForgotpasswordScreen></ForgotpasswordScreen>
     // <UserprofileScreen></UserprofileScreen>
-    <UpdateDetails></UpdateDetails>
+    // <UpdateDetails></UpdateDetails>
     // <Storage></Storage>
   );
 };

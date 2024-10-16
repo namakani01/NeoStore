@@ -1,21 +1,28 @@
-import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  Modal,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/MaterialIcons';
-import Icon2 from 'react-native-vector-icons/Ionicons';
-import Icon3 from 'react-native-vector-icons/Feather'
-
+import Icon2 from 'react-native-vector-icons/AntDesign';
+import Icon3 from 'react-native-vector-icons/Feather';
 
 import EncryptedStorage from 'react-native-encrypted-storage';
 
 import axios from 'axios';
 
-const UserprofileScreen = (props) => {
+const UserprofileScreen = props => {
   const [isOrdersFocused, setIsOrdersFocused] = useState(false);
-  const [isUpdateDetailsFocused , setIsUpdateDetailsFocused] = useState(false)
+  const [isUpdateDetailsFocused, setIsUpdateDetailsFocused] = useState(false);
   const [isAccountDetailsFocused, setIsAccountDetailsFocused] = useState(false);
   const [isLogoutFocused, setIsLogoutFocused] = useState(false);
   const [Username, setUsername] = useState(null);
+
+  const [openmodal, setopenmodal] = useState(false);
 
   async function FetchUserDetails() {
     try {
@@ -47,9 +54,24 @@ const UserprofileScreen = (props) => {
   // {
   //     FetchUserDetails()
   // },[])
+
+
+
+  async function Logout() {
+    try {
+      await EncryptedStorage.removeItem('access_token');
+      setopenmodal(false)
+      props.navigation.navigate('Login')
+      
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <SafeAreaView>
-      <View style={{marginHorizontal : 10}}>
+      <View style={{marginHorizontal: 10}}>
         <View style={{flexDirection: 'column'}}>
           <Text style={{fontSize: 16, marginTop: 15}}>Hello {Username}</Text>
           <Text style={{fontSize: 15, marginTop: 15}}>
@@ -107,7 +129,6 @@ const UserprofileScreen = (props) => {
             </View>
           </TouchableOpacity>
 
-
           <TouchableOpacity
             style={{
               borderWidth: 1,
@@ -124,7 +145,7 @@ const UserprofileScreen = (props) => {
               shadowRadius: 5,
               elevation: 4,
             }}
-            onPress={()=>props.navigation.navigate('UpdateDetails')}
+            onPress={() => props.navigation.navigate('UpdateDetails')}
             onPressIn={() => setIsUpdateDetailsFocused(true)}
             onPressOut={() => setIsUpdateDetailsFocused(false)}>
             <View
@@ -151,8 +172,6 @@ const UserprofileScreen = (props) => {
             </View>
           </TouchableOpacity>
 
-          
-
           <TouchableOpacity
             style={{
               borderWidth: 1,
@@ -169,7 +188,7 @@ const UserprofileScreen = (props) => {
               shadowRadius: 5,
               elevation: 4,
             }}
-            onPress={()=>props.navigation.navigate('AccountDetails')}
+            onPress={() => props.navigation.navigate('ChangePassword')}
             onPressIn={() => setIsAccountDetailsFocused(true)}
             onPressOut={() => setIsAccountDetailsFocused(false)}>
             <View
@@ -180,8 +199,8 @@ const UserprofileScreen = (props) => {
                 flexDirection: 'column',
               }}>
               <Icon2
-                name="person-circle-outline"
-                size={42}
+                name="sync"
+                size={40}
                 color={isAccountDetailsFocused ? '#2E6BC6' : 'grey'}
               />
               <Text
@@ -191,7 +210,7 @@ const UserprofileScreen = (props) => {
                   fontWeight: 'normal',
                   color: 'black',
                 }}>
-                Account Details
+                Change Password
               </Text>
             </View>
           </TouchableOpacity>
@@ -213,6 +232,7 @@ const UserprofileScreen = (props) => {
               shadowRadius: 5,
               elevation: 4,
             }}
+            onPress={() => setopenmodal(true)}
             onPressIn={() => setIsLogoutFocused(true)}
             onPressOut={() => setIsLogoutFocused(false)}>
             <View
@@ -238,6 +258,50 @@ const UserprofileScreen = (props) => {
               </Text>
             </View>
           </TouchableOpacity>
+
+          <Modal visible={openmodal} transparent={true}>
+            <View
+              style={{
+                backgroundColor: 'white',
+                alignContent: 'center',
+                alignSelf: 'center',
+                marginTop: 340,
+                height: 170,
+                width: 280,
+                borderRadius: 10,
+              }}>
+              <Text style={{textAlign: 'center', marginTop: 25, fontSize: 19}}>
+                Are you sure?
+              </Text>
+
+              <View
+                style={{
+                  flexDirection: 'row',
+                  marginTop: 35,
+                  justifyContent: 'space-around',
+                }}>
+                <TouchableOpacity
+                  onPress={() => setopenmodal(false)}
+                  style={{
+                    backgroundColor: 'grey',
+                    padding: 8,
+                    borderRadius: 8,
+                  }}>
+                  <Text style={{fontSize: 17, color: 'white'}}>Close</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                onPress={()=>Logout()}
+                  style={{
+                    backgroundColor: '#2E6BC6',
+                    padding: 8,
+                    borderRadius: 8,
+                  }}>
+                  <Text style={{fontSize: 17, color: 'white'}}>Confirm</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
         </View>
       </View>
     </SafeAreaView>

@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/Fontisto';
 import Icon1 from 'react-native-vector-icons/Feather';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 const LoginScreen = props => {
   var emailregex = /[a-zA-Z0-9\.\-_]+[@]+[a-z]+[\.]+[a-z]{2,3}/;
@@ -102,10 +103,16 @@ const LoginScreen = props => {
           },
         },
       );
-      console.log('The data', result?.data);
+      console.log('The data', result?.data , result?.data?.data?.access_token);
       if (result.status === 200) {
-        Alert.alert('Login Sucessfull');
-        props.navigation.navigate('HomeScreen');
+        const accessToken = result?.data?.data?.access_token;
+        if (accessToken) {
+          await EncryptedStorage.setItem('access_token', accessToken);
+          Alert.alert('Login Sucessfull' , 'token stored');
+          props.navigation.replace('HomeScreen');
+        } else {
+          Alert.alert('Token not found');
+        }
       }
     } catch (error) {
       if (error.response) {
@@ -220,9 +227,9 @@ const LoginScreen = props => {
         ) : null}
 
         <TouchableOpacity
-          style={{marginTop: 18, marginLeft: 225}}
+          style={{marginTop: 18, marginLeft: 220}}
           onPress={() => props.navigation.navigate('Forgot Password')}>
-          <Text style={{fontSize: 14, color: '#2E6BC6'}}>
+          <Text style={{fontSize: 15, color: '#2E6BC6'}}>
             Lost your password?
           </Text>
         </TouchableOpacity>

@@ -21,8 +21,6 @@ import Icon7 from 'react-native-vector-icons/FontAwesome';
 
 import Icon8 from 'react-native-vector-icons/Entypo';
 import axios from 'axios';
-import EncryptedStorage from 'react-native-encrypted-storage'
-
 
 
 
@@ -234,12 +232,15 @@ const SignupScreen = props => {
         },
       );
       console.log('The data', result?.data, result?.data?.data?.access_token);
-      const accessToken = result?.data?.data?.access_token;
-      if (accessToken) {
-        await EncryptedStorage.setItem('access_token', accessToken);
-        Alert.alert('Registration successful');
-      } else {
-        Alert.alert('Token not found');
+      
+
+      if (result.status === 200) {
+        Alert.alert('Registeration Successful')
+        props.navigation.navigate('Login')
+      }
+      else 
+      {
+        Alert.alert("Error")
       }
 
     } catch (error) {
