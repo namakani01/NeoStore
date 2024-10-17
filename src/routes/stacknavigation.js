@@ -8,6 +8,9 @@ import MyTabs from './route'
 import ForgotpasswordScreen from '../screens/forgotpasswordScreen'
 import ChangePassword from '../screens/ChangePassword'
 import UpdateDetails from '../screens/UpdateDetails'
+import TableScreen from '../screens/TableScreen'
+import TableDetails from '../screens/TableDetails'
+import ChairDetails from '../screens/ChairDetails'
 
 const Stack = createNativeStackNavigator()
 
@@ -22,6 +25,9 @@ const Stacknavigation = () => {
         <Stack.Screen name = 'HomeScreen' component={MyTabs}></Stack.Screen>
         <Stack.Screen name = 'ChangePassword' component={ChangePassword}></Stack.Screen>
         <Stack.Screen name = 'UpdateDetails' component={UpdateDetails}></Stack.Screen>
+        <Stack.Screen name = 'Table' component={TableScreen}></Stack.Screen>
+        <Stack.Screen name = 'TableDetails'  component={TableDetails}></Stack.Screen>
+        <Stack.Screen name = 'ChairDetails' component={ChairDetails}></Stack.Screen>
     </Stack.Navigator>
 </NavigationContainer>
   )

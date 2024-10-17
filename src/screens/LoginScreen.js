@@ -20,9 +20,9 @@ const LoginScreen = props => {
   var passwordregex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&^])[A-Za-z\d@.#$!%*?&]*$/;
 
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('Kamal@gmail.com');
 
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('Nam@9930');
 
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -103,12 +103,12 @@ const LoginScreen = props => {
           },
         },
       );
-      console.log('The data', result?.data , result?.data?.data?.access_token);
+      console.log('The data', result?.data, result?.data?.data?.access_token);
       if (result.status === 200) {
         const accessToken = result?.data?.data?.access_token;
         if (accessToken) {
           await EncryptedStorage.setItem('access_token', accessToken);
-          Alert.alert('Login Sucessfull' , 'token stored');
+          Alert.alert('Login Sucessfull', 'token stored');
           props.navigation.replace('HomeScreen');
         } else {
           Alert.alert('Token not found');
@@ -169,7 +169,12 @@ const LoginScreen = props => {
             value={email}
             onChangeText={text => setEmail(text)}
             onBlur={validateEmail}
-            style={{height: 47, width: '85%', marginLeft: 10}}></TextInput>
+            style={{
+              height: 47,
+              width: '85%',
+              marginLeft: 10,
+              color: '#2E6BC6',
+            }}></TextInput>
         </View>
         {emailError ? (
           <Text

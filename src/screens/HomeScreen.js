@@ -6,7 +6,11 @@ import {styles} from '../assests/styles/Externalstyle';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import {Dimensions} from 'react-native';
 
-const HomeScreen = () => {
+const HomeScreen = (props) => {
+
+  // console.log(">>>>>",props)
+
+
   const data = [
     {
       id: 1,
@@ -64,6 +68,7 @@ const HomeScreen = () => {
           marginTop: 50,
         }}>
         <TouchableOpacity
+        onPress={()=>props.navigation.navigate('Table')}
           style={{
             padding: 26,
             width: 120,
