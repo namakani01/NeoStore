@@ -57,6 +57,8 @@
 		<string>RobotoMono-SemiBold.ttf</string>
 		<string>Sono-Regular.ttf</string>
 		<string>NotoSansJP-Regular.ttf</string>
+		<string>Helvetica.ttf</string>
+		<string>Helvetica-Bold.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

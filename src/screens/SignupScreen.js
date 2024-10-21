@@ -425,7 +425,7 @@ const SignupScreen = props => {
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
-                style={{marginTop: 12, marginLeft: 3}}
+                style={{marginTop: 12, marginLeft: 12}}
                 onPress={() => setSecure(!secure)}>
                 <Icon8
                   name={'eye-with-line'}

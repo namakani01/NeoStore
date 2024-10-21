@@ -69,6 +69,7 @@ const HomeScreen = (props) => {
         }}>
         <TouchableOpacity
         onPress={()=>props.navigation.navigate('Table')}
+        
           style={{
             padding: 26,
             width: 120,
@@ -79,10 +80,11 @@ const HomeScreen = (props) => {
           <Image
             style={{height: 73, width: 75}}
             source={require('../assests/images/table.png')}></Image>
-          <Text style={{marginTop: 30, textAlign: 'center'}}>Table</Text>
+          <Text style={{marginTop: 30, textAlign: 'center',fontSize : 16 , color : 'black' , fontWeight  :'400'}}>Table</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
+        onPress={()=>props.navigation.navigate('Chair')}
           style={{
             padding: 25,
             width: 120,
@@ -93,7 +95,7 @@ const HomeScreen = (props) => {
           <Image
             style={{height: 73, width: 75}}
             source={require('../assests/images/chair.png')}></Image>
-          <Text style={{marginTop: 30, textAlign: 'center'}}>Chairs</Text>
+          <Text style={{marginTop: 30, textAlign: 'center',fontSize : 16 , color : 'black' , fontWeight  :'400'}}>Chairs</Text>
         </TouchableOpacity>
       </View>
 
@@ -101,9 +103,10 @@ const HomeScreen = (props) => {
         style={{
           flexDirection: 'row',
           justifyContent: 'space-around',
-          marginTop: 50,
+          marginTop: 70,
         }}>
         <TouchableOpacity
+        onPress={()=>props.navigation.navigate('Sofa')}
           style={{
             padding: 25,
             width: 120,
@@ -114,10 +117,11 @@ const HomeScreen = (props) => {
           <Image
             style={{height: 73, width: 75}}
             source={require('../assests/images/sofa.png')}></Image>
-          <Text style={{marginTop: 30, textAlign: 'center'}}>Sofa</Text>
+          <Text style={{marginTop: 30, textAlign: 'center' , fontSize : 16 , color : 'black' , fontWeight  :'400'}}>Sofa</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
+        onPress={()=>props.navigation.navigate('Beds')}
           style={{
             padding: 25,
             width: 120,
@@ -128,7 +132,7 @@ const HomeScreen = (props) => {
           <Image
             style={{height: 73, width: 75}}
             source={require('../assests/images/bed.png')}></Image>
-          <Text style={{marginTop: 30, textAlign: 'center'}}>Beds</Text>
+          <Text style={{marginTop: 30, textAlign: 'center',fontSize : 16 , color : 'black' , fontWeight  :'400'}}>Beds</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

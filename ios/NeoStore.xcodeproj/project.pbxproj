@@ -37,6 +37,8 @@
 		B5E571DA2CB3E2DF00669B6C /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5E571C62CB3E2DF00669B6C /* SimpleLineIcons.ttf */; };
 		B5E571DB2CB3E2DF00669B6C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5E571C72CB3E2DF00669B6C /* Zocial.ttf */; };
 		E86D32C0DE2E43C396C2ABD5 /* Sono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3446E653A254E079B3D76B8 /* Sono-Regular.ttf */; };
+		3DEB78CC82BC4DE0BDA6D72E /* Helvetica.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 914E789D8D1C4C389E2CAD10 /* Helvetica.ttf */; };
+		3CA3F3A35B7745B187CD1DDE /* Helvetica-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECA3BDEC324A4FA18183D508 /* Helvetica-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +93,8 @@
 		C3446E653A254E079B3D76B8 /* Sono-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Sono-Regular.ttf"; path = "../src/assests/fonts/Sono-Regular.ttf"; sourceTree = "<group>"; };
 		C4D3C9B53EE049A08171F929 /* NotoSansJP-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansJP-Regular.ttf"; path = "../src/assests/fonts/NotoSansJP-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		914E789D8D1C4C389E2CAD10 /* Helvetica.ttf */ = {isa = PBXFileReference; name = "Helvetica.ttf"; path = "../src/assests/fonts/Helvetica.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		ECA3BDEC324A4FA18183D508 /* Helvetica-Bold.ttf */ = {isa = PBXFileReference; name = "Helvetica-Bold.ttf"; path = "../src/assests/fonts/Helvetica-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +198,8 @@
 				A5AC71D6C3684DBEACAA0387 /* RobotoMono-SemiBold.ttf */,
 				C3446E653A254E079B3D76B8 /* Sono-Regular.ttf */,
 				C4D3C9B53EE049A08171F929 /* NotoSansJP-Regular.ttf */,
+				914E789D8D1C4C389E2CAD10 /* Helvetica.ttf */,
+				ECA3BDEC324A4FA18183D508 /* Helvetica-Bold.ttf */,
 			);
 			name = Resources;
 			path = "";
@@ -355,6 +361,8 @@
 				12CB67216AF44EBB8E64BC6A /* RobotoMono-SemiBold.ttf in Resources */,
 				E86D32C0DE2E43C396C2ABD5 /* Sono-Regular.ttf in Resources */,
 				440DC8B6694C4777B2EFFEC4 /* NotoSansJP-Regular.ttf in Resources */,
+				3DEB78CC82BC4DE0BDA6D72E /* Helvetica.ttf in Resources */,
+				3CA3F3A35B7745B187CD1DDE /* Helvetica-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

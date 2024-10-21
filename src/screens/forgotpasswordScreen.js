@@ -1,4 +1,4 @@
-import {View, Text, TextInput, TouchableOpacity,Alert} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity, Alert} from 'react-native';
 import React, {useState} from 'react';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/Fontisto';
@@ -10,7 +10,6 @@ const ForgotpasswordScreen = () => {
   var emailregex = /[a-zA-Z0-9\.\-_]+[@]+[a-z]+[\.]+[a-z]{2,3}/;
 
   const validateEmail = () => {
-    
     if (!email) {
       setEmailError('Email is required.');
     } else if (!emailregex.test(email)) {
@@ -39,8 +38,6 @@ const ForgotpasswordScreen = () => {
       Alert.alert('Please enter correct details');
     }
   };
-
-
 
   async function ForgetApiData() {
     const formData = new FormData();
@@ -72,7 +69,7 @@ const ForgotpasswordScreen = () => {
   }
 
   return (
-    <View style={{marginVertical: 100, marginHorizontal: 13}}>
+    <View style={{marginVertical: 120, marginHorizontal: 13}}>
       <View style={{flexDirection: 'column'}}>
         <Text style={{color: '#777777', fontSize: 14}}>
           Lost your password? Please enter your email address.
@@ -116,7 +113,7 @@ const ForgotpasswordScreen = () => {
       ) : null}
 
       <TouchableOpacity
-      onPress={handleResetPassword}
+        onPress={handleResetPassword}
         style={{
           backgroundColor: '#2E6BC6',
           marginTop: 25,

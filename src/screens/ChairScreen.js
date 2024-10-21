@@ -5,21 +5,18 @@ import axios from 'axios';
 import {StarRatingDisplay} from 'react-native-star-rating-widget';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const TableScreen = props => {
+const ChairScreen = () => {
+
   const [output, setoutput] = useState([]);
-  const [page, setPage] = useState(1);
+  console.log('>>>>> output :', output);
 
-  const [showSeeMore, setShowSeeMore] = useState(false);
-
-  // console.log('>>>>>output :', output);
-
-  async function ShowTables() {
+  async function ShowChairs() {
     try {
       const accessToken = await EncryptedStorage.getItem('access_token');
 
       if (accessToken) {
         let result = await axios.get(
-          `http://staging.php-dev.in:8844/trainingapp/api/products/getList?product_category_id=1&page=${page}`,
+          `http://staging.php-dev.in:8844/trainingapp/api/products/getList?product_category_id=2`,
           {
             headers: {
               'Content-Type': 'multipart/form-data',
@@ -27,8 +24,7 @@ const TableScreen = props => {
           },
         );
 
-        setoutput(prevOutput => [...prevOutput, ...result.data.data]);
-        setPage(prevPage => prevPage + 1);
+        setoutput(result?.data?.data);
       } else {
         Alert.alert('Error');
       }
@@ -38,7 +34,7 @@ const TableScreen = props => {
   }
 
   useEffect(() => {
-    ShowTables();
+    ShowChairs();
   }, []);
 
   return (
@@ -47,9 +43,6 @@ const TableScreen = props => {
         data={output}
         renderItem={({item}) => (
           <TouchableOpacity
-            onPress={() => {
-              props.navigation.navigate('ProductDetails', {id: item.id});
-            }}
             style={{
               borderWidth: 1,
               height: 380,
@@ -67,8 +60,8 @@ const TableScreen = props => {
             }}>
             <Image
               style={{
-                height: 150,
-                width: 250,
+                height:'37%',
+                width: '55%',
                 alignSelf: 'center',
                 marginTop: 24,
               }}
@@ -146,21 +139,10 @@ const TableScreen = props => {
             </View>
           </TouchableOpacity>
         )}
-        onEndReached={() => setShowSeeMore(true)}
-        onScroll={() => setShowSeeMore(false)}
       />
 
-      {showSeeMore ? (
-        <TouchableOpacity
-          onPress={() => ShowTables()}
-          style={{alignSelf: 'center', marginVertical: 15}}>
-          <Text style={{fontSize: 18, fontWeight: 'bold', color: '#2E6BC6'}}>
-            See More
-          </Text>
-        </TouchableOpacity>
-      ) : null}
     </View>
   );
 };
 
-export default TableScreen;
+export default ChairScreen;

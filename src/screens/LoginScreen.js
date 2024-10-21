@@ -12,6 +12,7 @@ import Logo from '../components/Logo';
 import Icon from 'react-native-vector-icons/Fontisto';
 import Icon1 from 'react-native-vector-icons/Feather';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
+import Icon3 from 'react-native-vector-icons/Entypo';
 import axios from 'axios';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
@@ -21,8 +22,8 @@ const LoginScreen = props => {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&^])[A-Za-z\d@.#$!%*?&]*$/;
 
   const [email, setEmail] = useState('Kamal@gmail.com');
-
   const [password, setPassword] = useState('Nam@9930');
+  const [secure, setSecure] = useState(false);
 
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -132,7 +133,7 @@ const LoginScreen = props => {
 
   return (
     <SafeAreaView>
-      <View style={{height: 500, marginTop: 80, alignSelf: 'center'}}>
+      <View style={{height: 500, marginTop: 100, alignSelf: 'center'}}>
         <View>
           <Logo />
         </View>
@@ -213,6 +214,7 @@ const LoginScreen = props => {
             color={'grey'}></Icon1>
           <TextInput
             value={password}
+            secureTextEntry={secure}
             onChangeText={text => setPassword(text)}
             onBlur={validatePassword}
             style={{
@@ -220,9 +222,19 @@ const LoginScreen = props => {
               marginLeft: 10,
               width: '75%',
             }}></TextInput>
-          <TouchableOpacity style={{marginTop: 13, marginLeft: 10}}>
-            <Icon2 name="eye" size={20} color={'grey'}></Icon2>
-          </TouchableOpacity>
+          {secure === false ? (
+            <TouchableOpacity
+              style={{marginTop: 13, marginLeft: 10}}
+              onPress={() => setSecure(!secure)}>
+              <Icon2 name={'eye'} size={20} color={'grey'}></Icon2>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={{marginTop: 13, marginLeft: 10}}
+              onPress={() => setSecure(!secure)}>
+              <Icon3 name={'eye-with-line'} size={20} color={'grey'}></Icon3>
+            </TouchableOpacity>
+          )}
         </View>
         {passwordError ? (
           <Text
