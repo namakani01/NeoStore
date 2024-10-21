@@ -103,7 +103,7 @@ const SofaScreen = () => {
               style={{marginTop: 10, marginHorizontal: 25, fontSize: 16}}>
               {item.description}
             </Text>
-
+{/*  */}
             <View
               style={{
                 flexDirection: 'row',
