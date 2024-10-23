@@ -1,4 +1,4 @@
-import {View, Text, Image, TouchableOpacity,Alert} from 'react-native';
+import {View, Text, Image, TouchableOpacity, Alert} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import {Dimensions} from 'react-native';
@@ -9,6 +9,8 @@ import Icon1 from 'react-native-vector-icons/FontAwesome6';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 import {ActivityIndicator} from 'react-native-paper';
+import {useDispatch} from 'react-redux';
+import {setCartCount} from '../redux/cartSlice';
 
 const ProductDetails = props => {
   // console.log('###'  ,props.route.params.id)
@@ -16,6 +18,7 @@ const ProductDetails = props => {
   const [output, setOutput] = useState('');
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(1);
+  const dispatch = useDispatch(); 
 
   // console.log('output', output);
 
@@ -71,8 +74,10 @@ const ProductDetails = props => {
             },
           },
         );
-        console.log('The Add to  cart data', result?.data);
+        console.log('The Add to  cart data', result?.data?.total_carts);
         Alert.alert('Product added to cart successfully');
+
+        dispatch(setCartCount(result?.data?.total_carts)); 
       } else {
         Alert.alert('Added to cart.');
       }
@@ -163,8 +168,8 @@ const ProductDetails = props => {
 
           <TouchableOpacity
             onPress={() => {
-              if (count >= 10) {
-                setCount(10);
+              if (count >= 8) {
+                setCount(8);
               } else {
                 setCount(count + 1);
               }
@@ -216,7 +221,7 @@ const ProductDetails = props => {
       <View
         style={{
           flexDirection: 'row',
-          marginTop: 20,
+          marginTop: 23,
           justifyContent: 'space-between',
           marginLeft: 15,
           width: '90%',
@@ -225,7 +230,7 @@ const ProductDetails = props => {
           borderLeftWidth: 0,
           borderRightWidth: 0,
           borderBottomColor: '#ccc',
-          paddingBottom: 17,
+          paddingBottom: 15,
         }}>
         <Text style={{fontSize: 17, fontWeight: 'bold'}}>Share: </Text>
         <Icon2 name="facebook" size={20}></Icon2>
@@ -244,7 +249,7 @@ const ProductDetails = props => {
           borderRightWidth: 0,
           borderBottomWidth: 1,
           borderBottomColor: '#ccc',
-          paddingBottom: 25,
+          paddingBottom: 20,
           width: '90%',
           marginLeft: 15,
         }}>
@@ -316,15 +321,15 @@ const ProductDetails = props => {
 
       <View style={{marginTop: 10, marginLeft: 15}}>
         <Text style={{fontSize: 17, color: 'black'}}>Description</Text>
-        <Text style={{marginTop: 13, fontSize: 15}}>{output.description}</Text>
+        <Text style={{marginTop: 10, fontSize: 15}}>{output.description}</Text>
       </View>
 
       <View style={{marginTop: 10, marginLeft: 15}}>
         <Text style={{fontSize: 17, color: 'black'}}>Reviews</Text>
         <StarRatingDisplay
-          style={{marginTop: 10}}
+          style={{marginTop: 9}}
           color="#FAAC58"
-          starSiz={24}
+          starSize={24}
           rating={output.rating}></StarRatingDisplay>
       </View>
     </View>

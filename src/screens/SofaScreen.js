@@ -5,9 +5,9 @@ import axios from 'axios';
 import {StarRatingDisplay} from 'react-native-star-rating-widget';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const SofaScreen = () => {
+const SofaScreen = (props) => {
   const [output, setoutput] = useState([]);
-  console.log('>>>>> output :', output);
+  // console.log('>>>>> output :', output);
 
   async function ShowSofa() {
     try {
@@ -42,6 +42,7 @@ const SofaScreen = () => {
         data={output}
         renderItem={({item}) => (
           <TouchableOpacity
+          onPress={()=>props.navigation.navigate('ProductDetails' , {id: item.id})}
             style={{
               borderWidth: 1,
               height: 380,

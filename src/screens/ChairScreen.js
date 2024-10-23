@@ -5,7 +5,9 @@ import axios from 'axios';
 import {StarRatingDisplay} from 'react-native-star-rating-widget';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const ChairScreen = () => {
+const ChairScreen = (props) => {
+
+  console.log(props)
 
   const [output, setoutput] = useState([]);
   console.log('>>>>> output :', output);
@@ -43,6 +45,7 @@ const ChairScreen = () => {
         data={output}
         renderItem={({item}) => (
           <TouchableOpacity
+          onPress={()=> props.navigation.navigate('ProductDetails' , {id: item.id})}
             style={{
               borderWidth: 1,
               height: 380,

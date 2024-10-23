@@ -13,6 +13,7 @@ import ChairScreen from '../screens/ChairScreen';
 import SofaScreen from '../screens/SofaScreen';
 import BedsScreen from '../screens/BedsScreen';
 import ProductDetails from '../screens/ProductDetails';
+import AddressScreen from '../screens/AddressScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,16 +28,16 @@ const Stacknavigation = () => {
           name="Forgot Password"
           component={ForgotpasswordScreen}></Stack.Screen>
         <Stack.Screen name="HomeScreen" component={MyTabs}></Stack.Screen>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="ChangePassword"
-          component={ChangePassword}></Stack.Screen>
-        <Stack.Screen
+          component={ChangePassword}></Stack.Screen> */}
+        {/* <Stack.Screen
           name="UpdateDetails"
           component={UpdateDetails}></Stack.Screen>
-        <Stack.Screen name="Table" component={TableScreen}></Stack.Screen>
-        <Stack.Screen
+        <Stack.Screen name="Table" component={TableScreen}></Stack.Screen> */}
+        {/* <Stack.Screen
           name="ProductDetails"
-          component={ProductDetails}></Stack.Screen>
+          component={ProductDetails}></Stack.Screen> */}
         <Stack.Screen
           name="ChairDetails"
           component={ChairDetails}></Stack.Screen>

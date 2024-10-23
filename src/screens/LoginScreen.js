@@ -104,7 +104,7 @@ const LoginScreen = props => {
           },
         },
       );
-      console.log('The data', result?.data, result?.data?.data?.access_token);
+      // console.log('The data', result?.data, result?.data?.data?.access_token);
       if (result.status === 200) {
         const accessToken = result?.data?.data?.access_token;
         if (accessToken) {
