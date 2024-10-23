@@ -46,6 +46,9 @@ const Add_Address = props => {
     }
 
     if (street === '') {
+
+
+      
       setStreetError('Required');
       valid = false;
     } else {
