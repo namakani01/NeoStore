@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  SafeAreaView,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import ImagePicker from 'react-native-image-crop-picker';
@@ -20,6 +21,12 @@ import Icon3 from 'react-native-vector-icons/FontAwesome5';
 import Icon4 from 'react-native-vector-icons/Fontisto';
 import Icon5 from 'react-native-vector-icons/SimpleLineIcons';
 import Icon6 from 'react-native-vector-icons/Fontisto';
+
+import {
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from '../assests/styles/Metrics';
 
 const UpdateDetails = () => {
   var emailregex = /[a-zA-Z0-9\.\-_]+[@]+[a-z]+[\.]+[a-z]{2,3}/;
@@ -60,7 +67,7 @@ const UpdateDetails = () => {
   async function FetchUserDetails() {
     try {
       const accessToken = await EncryptedStorage.getItem('access_token');
-      console.log('Retrieved Token:', accessToken);
+      // console.log('Retrieved Token:', accessToken);
 
       if (accessToken) {
         let result = await axios.get(
@@ -72,7 +79,7 @@ const UpdateDetails = () => {
             },
           },
         );
-        console.log(result.data);
+        // console.log(result.data);
         const userData = result.data.data?.user_data;
         setFirstname(userData.first_name);
         setLastname(userData.last_name);
@@ -123,7 +130,7 @@ const UpdateDetails = () => {
             },
           },
         );
-        console.log('>>>>', result?.data);
+        // console.log('>>>>', result?.data);
         setImage(result?.data?.data?.profile_pic);
         Alert.alert('User details updated successfully');
       } else {
@@ -191,269 +198,313 @@ const UpdateDetails = () => {
   };
 
   return (
-    <ScrollView>
-      <View
-        style={{
-          marginHorizontal: 10,
-          marginTop: 20,
-        }}>
-        <View>
-          <Image
-            style={{
-              height: 100,
-              width: 100,
-              borderRadius: 100,
-              padding: 65,
-              alignSelf: 'center',
-              borderWidth: 2,
-              borderColor: 'grey',
-            }}
-            source={{uri: image}}
-          />
-        </View>
-
-        <View style={{position: 'absolute', marginLeft: 210, marginTop: 80}}>
-          <TouchableOpacity
-            onPress={Picture}
-            style={{
-              height: 50,
-              width: 50,
-              borderRadius: 50,
-              backgroundColor: 'white',
-              alignSelf: 'center',
-            }}>
-            <Icon1
-              style={{alignSelf: 'center', marginTop: 10}}
-              name="camera"
-              size={25}></Icon1>
-          </TouchableOpacity>
-        </View>
-
-        <Text
-          style={{
-            fontSize: 15,
-            fontWeight: '400',
-            color: 'black',
-            marginTop: 10,
-          }}>
-          First Name
-        </Text>
-
+    <ScrollView style={{flex: 1, backgroundColor: 'white'}}>
+      <SafeAreaView>
         <View
           style={{
-            marginTop: 10,
-            flexDirection: 'row',
-            borderWidth: 3,
-            borderRadius: 8,
-            borderColor: '#ccc',
+            marginHorizontal: horizontalScale(12),
+            marginTop: verticalScale(20),
           }}>
-          <Icon2
-            style={{marginTop: 10, marginLeft: 5}}
-            name="user"
-            size={23}></Icon2>
-
-          <TextInput
-            value={firstname}
-            onChangeText={text => setFirstname(text)}
-            style={{
-              marginLeft: 7,
-              height: 45,
-              width: '85%',
-            }}></TextInput>
-        </View>
-        {firtnameError ? (
-          <Text
-            style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
-            {firtnameError}
-          </Text>
-        ) : null}
-
-        <Text
-          style={{
-            fontSize: 15,
-            fontWeight: '400',
-            color: 'black',
-            marginTop: 10,
-          }}>
-          Last Name
-        </Text>
-
-        <View
-          style={{
-            marginTop: 10,
-            flexDirection: 'row',
-            borderWidth: 3,
-            borderRadius: 8,
-            borderColor: '#ccc',
-          }}>
-          <Icon3
-            style={{marginTop: 10, marginLeft: 6}}
-            name="address-card"
-            size={23}></Icon3>
-          <TextInput
-            value={lastname}
-            onChangeText={text => setLastname(text)}
-            style={{
-              marginLeft: 7,
-              height: 45,
-              width: '85%',
-              // borderWidth: 2,
-            }}></TextInput>
-        </View>
-        {lastnameError ? (
-          <Text
-            style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
-            {lastnameError}
-          </Text>
-        ) : null}
-
-        <Text
-          style={{
-            fontSize: 15,
-            marginTop: 10,
-            fontWeight: '400',
-            color: 'black',
-          }}>
-          Email
-        </Text>
-
-        <View
-          style={{
-            marginTop: 10,
-            flexDirection: 'row',
-            borderWidth: 3,
-            borderRadius: 8,
-            borderColor: '#ccc',
-          }}>
-          <Icon4
-            style={{marginTop: 10, marginLeft: 6}}
-            name="email"
-            size={23}></Icon4>
-
-          <TextInput
-            value={email}
-            onChangeText={text => setEmail(text)}
-            style={{
-              marginLeft: 7,
-              height: 45,
-              width: '85%',
-              // borderColor: 'red',
-              // borderWidth: 2,
-            }}></TextInput>
-        </View>
-        {emailError ? (
-          <Text
-            style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
-            {emailError}
-          </Text>
-        ) : null}
-
-        <Text
-          style={{
-            fontSize: 15,
-            marginTop: 10,
-            fontWeight: '400',
-            color: 'black',
-          }}>
-          Phone Number
-        </Text>
-
-        <View
-          style={{
-            marginTop: 10,
-            flexDirection: 'row',
-            borderWidth: 3,
-            borderRadius: 8,
-            borderColor: '#ccc',
-          }}>
-          <Icon5
-            style={{marginTop: 10, marginLeft: 6}}
-            name={'phone'}
-            size={24}
-            color={'grey'}></Icon5>
-          <TextInput
-            value={phonenumber}
-            onChangeText={text => setPhonenumber(text)}
-            keyboardType="numeric"
-            style={{
-              marginLeft: 7,
-              height: 45,
-              width: '85%',
-              // borderColor: 'red',
-              // borderWidth: 2,
-            }}></TextInput>
-        </View>
-        {phonenumberError ? (
-          <Text
-            style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
-            {phonenumberError}
-          </Text>
-        ) : null}
-
-        <Text
-          style={{
-            fontSize: 15,
-            marginTop: 10,
-            fontWeight: '400',
-            color: 'black',
-          }}>
-          Date of Birth
-        </Text>
-        <View
-          style={{
-            marginTop: 10,
-            borderWidth: 3,
-            borderColor: '#ccc',
-            borderRadius: 8,
-            padding: 12,
-          }}>
-          <TouchableOpacity onPress={() => setOpen(true)}>
-            <View style={{flexDirection: 'row'}}>
-              <Icon6 name="date" size={23} color={'grey'}></Icon6>
-              <Text
-                style={{
-                  marginLeft: 20,
-                  color: 'black',
-                  fontWeight: '400',
-                  fontSize: 15,
-                }}>
-                {check ? formattedate : 'Select Date of Birth'}
-              </Text>
-            </View>
-            <DatePicker
-              modal
-              mode="date"
-              open={open}
-              date={date}
-              onConfirm={handleConfirm}
-              onCancel={() => {
-                setOpen(false);
+          <View>
+            <Image
+              style={{
+                height: verticalScale(100),
+                width: horizontalScale(100),
+                borderRadius: moderateScale(70),
+                padding: horizontalScale(54),
+                alignSelf: 'center',
+                borderWidth: 2,
+                borderColor: 'grey',
               }}
+              source={{uri: image}}
             />
-          </TouchableOpacity>
-        </View>
+          </View>
 
-        <TouchableOpacity
-          onPress={handleUpdateDetails}
-          style={{
-            backgroundColor: '#2E6BC6',
-            marginTop: 35,
-            padding: 5,
-            marginHorizontal: 120,
-            borderRadius: 10,
-          }}>
+          <View
+            style={{
+              position: 'absolute',
+              marginLeft: horizontalScale(195),
+              marginTop: verticalScale(65),
+            }}>
+            <TouchableOpacity
+              onPress={Picture}
+              style={{
+                height: verticalScale(40),
+                width: horizontalScale(40),
+                borderRadius: moderateScale(40),
+                backgroundColor: 'white',
+                alignSelf: 'center',
+              }}>
+              <Icon1
+                style={{
+                  alignSelf: 'center',
+                  marginTop: verticalScale(10),
+                  marginLeft: horizontalScale(4),
+                }}
+                name="camera"
+                size={21}></Icon1>
+            </TouchableOpacity>
+          </View>
+
           <Text
             style={{
-              color: 'white',
-              textAlign: 'center',
-              padding: 5,
-              fontSize: 16,
-              fontFamily: 'RobotoMono-SemiBold',
+              fontSize: moderateScale(14),
+              fontWeight: '400',
+              color: 'black',
+              marginTop: verticalScale(10),
             }}>
-            Save Changes
+            First Name
           </Text>
-        </TouchableOpacity>
-      </View>
+
+          <View
+            style={{
+              marginTop: verticalScale(10),
+              flexDirection: 'row',
+              borderWidth: 3,
+              borderRadius: moderateScale(8),
+              borderColor: '#ccc',
+            }}>
+            <Icon2
+              style={{
+                marginTop: verticalScale(10),
+                marginLeft: horizontalScale(7),
+              }}
+              name="user"
+              size={21}></Icon2>
+
+            <TextInput
+              value={firstname}
+              onChangeText={text => setFirstname(text)}
+              style={{
+                marginLeft: horizontalScale(7),
+                height: verticalScale(40),
+                // borderWidth: 2,
+                width: '80%',
+              }}></TextInput>
+          </View>
+          {firtnameError ? (
+            <Text
+              style={{
+                color: 'red',
+                fontSize: moderateScale(13),
+                marginTop: verticalScale(4),
+                marginLeft: horizontalScale(5),
+              }}>
+              {firtnameError}
+            </Text>
+          ) : null}
+
+          <Text
+            style={{
+              fontSize: moderateScale(14),
+              fontWeight: '400',
+              color: 'black',
+              marginTop: verticalScale(10),
+            }}>
+            Last Name
+          </Text>
+
+          <View
+            style={{
+              marginTop: verticalScale(10),
+              flexDirection: 'row',
+              // backgroundColor: 'red',
+              borderWidth: 3,
+              borderRadius: moderateScale(8),
+              borderColor: '#ccc',
+            }}>
+            <Icon3
+              style={{
+                marginTop: verticalScale(11),
+                marginLeft: horizontalScale(7),
+              }}
+              name="address-card"
+              size={21}></Icon3>
+            <TextInput
+              value={lastname}
+              onChangeText={text => setLastname(text)}
+              style={{
+                marginLeft: horizontalScale(7),
+                height: verticalScale(40),
+                width: '80%',
+                // borderWidth: 2,
+              }}></TextInput>
+          </View>
+          {lastnameError ? (
+            <Text
+              style={{
+                color: 'red',
+                fontSize: moderateScale(13),
+                marginTop: verticalScale(4),
+                marginLeft: horizontalScale(5),
+              }}>
+              {lastnameError}
+            </Text>
+          ) : null}
+
+          <Text
+            style={{
+              fontSize: moderateScale(14),
+              fontWeight: '400',
+              color: 'black',
+              marginTop: verticalScale(10),
+            }}>
+            Email
+          </Text>
+
+          <View
+            style={{
+              marginTop: verticalScale(10),
+              flexDirection: 'row',
+              borderWidth: 3,
+              borderRadius: moderateScale(8),
+              borderColor: '#ccc',
+            }}>
+            <Icon4
+              style={{
+                marginTop: verticalScale(11),
+                marginLeft: horizontalScale(7),
+              }}
+              name="email"
+              size={21}></Icon4>
+
+            <TextInput
+              value={email}
+              onChangeText={text => setEmail(text)}
+              style={{
+                marginLeft: horizontalScale(7),
+                height: verticalScale(40),
+                width: '80%',
+                // borderWidth: 2,
+              }}></TextInput>
+          </View>
+          {emailError ? (
+            <Text
+              style={{
+                color: 'red',
+                fontSize: moderateScale(13),
+                marginTop: verticalScale(3),
+                marginLeft: horizontalScale(5),
+              }}>
+              {emailError}
+            </Text>
+          ) : null}
+
+          <Text
+            style={{
+              fontSize: moderateScale(14),
+              fontWeight: '400',
+              color: 'black',
+              marginTop: verticalScale(10),
+            }}>
+            Phone Number
+          </Text>
+
+          <View
+            style={{
+              marginTop: verticalScale(10),
+              flexDirection: 'row',
+              borderWidth: 3,
+              borderRadius: moderateScale(8),
+              borderColor: '#ccc',
+            }}>
+            <Icon5
+              style={{
+                marginTop: verticalScale(11),
+                marginLeft: horizontalScale(7),
+              }}
+              name={'phone'}
+              size={21}
+              color={'grey'}></Icon5>
+            <TextInput
+              value={phonenumber}
+              onChangeText={text => setPhonenumber(text)}
+              keyboardType="numeric"
+              style={{
+                marginLeft: horizontalScale(7),
+                height: verticalScale(40),
+                width: '80%',
+                // borderWidth: 2,
+              }}></TextInput>
+          </View>
+          {phonenumberError ? (
+            <Text
+              style={{
+                color: 'red',
+                fontSize: moderateScale(13),
+                marginTop: verticalScale(3),
+                marginLeft: horizontalScale(5),
+              }}>
+              {phonenumberError}
+            </Text>
+          ) : null}
+
+          <Text
+            style={{
+              fontSize: moderateScale(14),
+              fontWeight: '400',
+              color: 'black',
+              marginTop: verticalScale(10),
+            }}>
+            Date of Birth
+          </Text>
+          <View
+            style={{
+              marginTop: verticalScale(10),
+              borderWidth: 3,
+              borderColor: '#ccc',
+              borderRadius: moderateScale(8),
+              padding: horizontalScale(10),
+              // backgroundColor: 'red',
+            }}>
+            <TouchableOpacity onPress={() => setOpen(true)}>
+              <View style={{flexDirection: 'row'}}>
+                <Icon6 name="date" size={20} color={'grey'}></Icon6>
+                <Text
+                  style={{
+                    marginLeft: horizontalScale(17),
+                    color: 'black',
+                    fontWeight: '400',
+                    fontSize: moderateScale(14),
+                  }}>
+                  {check ? formattedate : 'Select Date of Birth'}
+                </Text>
+              </View>
+              <DatePicker
+                modal
+                mode="date"
+                open={open}
+                date={date}
+                onConfirm={handleConfirm}
+                onCancel={() => {
+                  setOpen(false);
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity
+            onPress={handleUpdateDetails}
+            style={{
+              backgroundColor: '#2E6BC6',
+              marginTop: verticalScale(30),
+              padding: horizontalScale(5),
+              marginHorizontal: horizontalScale(105),
+              borderRadius: moderateScale(10),
+            }}>
+            <Text
+              style={{
+                color: 'white',
+                textAlign: 'center',
+                padding: horizontalScale(4),
+                fontSize: moderateScale(14.4),
+                fontFamily: 'RobotoMono-SemiBold',
+              }}>
+              Save Changes
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
     </ScrollView>
   );
 };

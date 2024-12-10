@@ -14,6 +14,7 @@ import SofaScreen from '../screens/SofaScreen';
 import BedsScreen from '../screens/BedsScreen';
 import ProductDetails from '../screens/ProductDetails';
 import AddressScreen from '../screens/AddressScreen';
+import SplashScreen from '../screens/SplashScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ const Stacknavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Splash" component={SplashScreen}></Stack.Screen>
         <Stack.Screen name="Login" component={LoginScreen}></Stack.Screen>
         <Stack.Screen name="Register" component={SignupScreen}></Stack.Screen>
         <Stack.Screen
@@ -28,22 +30,6 @@ const Stacknavigation = () => {
           name="Forgot Password"
           component={ForgotpasswordScreen}></Stack.Screen>
         <Stack.Screen name="HomeScreen" component={MyTabs}></Stack.Screen>
-        {/* <Stack.Screen
-          name="ChangePassword"
-          component={ChangePassword}></Stack.Screen> */}
-        {/* <Stack.Screen
-          name="UpdateDetails"
-          component={UpdateDetails}></Stack.Screen>
-        <Stack.Screen name="Table" component={TableScreen}></Stack.Screen> */}
-        {/* <Stack.Screen
-          name="ProductDetails"
-          component={ProductDetails}></Stack.Screen> */}
-        <Stack.Screen
-          name="ChairDetails"
-          component={ChairDetails}></Stack.Screen>
-        <Stack.Screen name="Chair" component={ChairScreen}></Stack.Screen>
-        <Stack.Screen name="Sofa" component={SofaScreen}></Stack.Screen>
-        <Stack.Screen name="Beds" component={BedsScreen}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

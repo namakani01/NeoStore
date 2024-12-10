@@ -5,12 +5,13 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from '../assests/styles/Externalstyle';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import {Dimensions} from 'react-native';
+import {
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from '../assests/styles/Metrics';
 
-const HomeScreen = (props) => {
-
-  // console.log(">>>>>",props)
-
-
+const HomeScreen = props => {
   const data = [
     {
       id: 1,
@@ -36,26 +37,29 @@ const HomeScreen = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
+      <View style={{marginTop: verticalScale(15)}}>
         <Logo />
       </View>
 
-      <View style={{marginTop: 12}}>
+      <View style={{marginTop: verticalScale(12)}}>
         <SwiperFlatList
           autoplay
           autoplayLoop
           autoplayDelay={2.1}
           showPagination
           paginationStyleItem={{
-            height: 10,
-            width: 10,
-            padding: 5,
-            marginTop: 3,
+            height: verticalScale(10),
+            width: horizontalScale(10),
+            padding: verticalScale(5),
+            marginTop: verticalScale(3),
           }}
           data={data}
           renderItem={({item}) => (
             <Image
-              style={{height: 250, width: Dimensions.get('screen').width}}
+              style={{
+                height: verticalScale(250),
+                width: Dimensions.get('screen').width,
+              }}
               source={{uri: item.image}}></Image>
           )}
         />
@@ -65,37 +69,54 @@ const HomeScreen = (props) => {
         style={{
           flexDirection: 'row',
           justifyContent: 'space-around',
-          marginTop: 50,
+          marginTop: verticalScale(35),
         }}>
         <TouchableOpacity
-        onPress={()=>props.navigation.navigate('Table')}
-        
+          onPress={() => props.navigation.navigate('Table')}
           style={{
-            padding: 26,
-            width: 120,
-            height: 120,
-            borderRadius: 60,
+            padding: verticalScale(25),
+            width: horizontalScale(110),
+            height: verticalScale(110),
+            borderRadius: moderateScale(60),
             backgroundColor: '#F2F2F2',
           }}>
           <Image
-            style={{height: 73, width: 75}}
+            style={{height: verticalScale(65), width: horizontalScale(65)}}
             source={require('../assests/images/table.png')}></Image>
-          <Text style={{marginTop: 30, textAlign: 'center',fontSize : 16 , color : 'black' , fontWeight  :'400'}}>Table</Text>
+          <Text
+            style={{
+              marginTop: verticalScale(30),
+              textAlign: 'center',
+              fontSize: moderateScale(16),
+              color: 'black',
+              fontWeight: '400',
+            }}>
+            Table
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-        onPress={()=>props.navigation.navigate('Chair')}
+          onPress={() => props.navigation.navigate('Chair')}
           style={{
-            padding: 25,
-            width: 120,
-            height: 120,
-            borderRadius: 60,
+            padding: verticalScale(25),
+            width: horizontalScale(110),
+            height: verticalScale(110),
+            borderRadius: moderateScale(60),
             backgroundColor: '#F2F2F2',
           }}>
           <Image
-            style={{height: 73, width: 75}}
+            style={{height: verticalScale(65), width: horizontalScale(65)}}
             source={require('../assests/images/chair.png')}></Image>
-          <Text style={{marginTop: 30, textAlign: 'center',fontSize : 16 , color : 'black' , fontWeight  :'400'}}>Chairs</Text>
+          <Text
+            style={{
+              marginTop: verticalScale(30),
+              textAlign: 'center',
+              fontSize: moderateScale(16),
+              color: 'black',
+              fontWeight: '400',
+            }}>
+            Chairs
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -103,36 +124,54 @@ const HomeScreen = (props) => {
         style={{
           flexDirection: 'row',
           justifyContent: 'space-around',
-          marginTop: 70,
+          marginTop: verticalScale(68),
         }}>
         <TouchableOpacity
-        onPress={()=>props.navigation.navigate('Sofa')}
+          onPress={() => props.navigation.navigate('Sofa')}
           style={{
-            padding: 25,
-            width: 120,
-            height: 120,
-            borderRadius: 60,
+            padding: verticalScale(25),
+            width: horizontalScale(110),
+            height: verticalScale(110),
+            borderRadius: moderateScale(60),
             backgroundColor: '#F2F2F2',
           }}>
           <Image
-            style={{height: 73, width: 75}}
+            style={{height: verticalScale(65), width: horizontalScale(65)}}
             source={require('../assests/images/sofa.png')}></Image>
-          <Text style={{marginTop: 30, textAlign: 'center' , fontSize : 16 , color : 'black' , fontWeight  :'400'}}>Sofa</Text>
+          <Text
+            style={{
+              marginTop: verticalScale(30),
+              textAlign: 'center',
+              fontSize: moderateScale(16),
+              color: 'black',
+              fontWeight: '400',
+            }}>
+            Sofa
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-        onPress={()=>props.navigation.navigate('Beds')}
+          onPress={() => props.navigation.navigate('Beds')}
           style={{
-            padding: 25,
-            width: 120,
-            height: 120,
-            borderRadius: 60,
+            padding: verticalScale(25),
+            width: horizontalScale(110),
+            height: verticalScale(110),
+            borderRadius: moderateScale(60),
             backgroundColor: '#F2F2F2',
           }}>
           <Image
-            style={{height: 73, width: 75}}
+            style={{height: verticalScale(65), width: horizontalScale(65)}}
             source={require('../assests/images/bed.png')}></Image>
-          <Text style={{marginTop: 30, textAlign: 'center',fontSize : 16 , color : 'black' , fontWeight  :'400'}}>Beds</Text>
+          <Text
+            style={{
+              marginTop: verticalScale(30),
+              textAlign: 'center',
+              fontSize: moderateScale(16),
+              color: 'black',
+              fontWeight: '400',
+            }}>
+            Beds
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

@@ -1,16 +1,27 @@
-import {View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import axios from 'axios';
 import {StarRatingDisplay} from 'react-native-star-rating-widget';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {
+  verticalScale,
+  horizontalScale,
+  moderateScale,
+} from '../assests/styles/Metrics';
 
-const ChairScreen = (props) => {
-
-  console.log(props)
+const ChairScreen = props => {
+  // console.log(props);
 
   const [output, setoutput] = useState([]);
-  console.log('>>>>> output :', output);
+  // console.log('>>>>> output :', output);
 
   async function ShowChairs() {
     try {
@@ -40,19 +51,21 @@ const ChairScreen = (props) => {
   }, []);
 
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <FlatList
         data={output}
         renderItem={({item}) => (
           <TouchableOpacity
-          onPress={()=> props.navigation.navigate('ProductDetails' , {id: item.id})}
+            onPress={() =>
+              props.navigation.navigate('ProductDetails', {id: item.id})
+            }
             style={{
               borderWidth: 1,
-              height: 380,
-              width: 350,
-              marginTop: 30,
+              height: verticalScale(340),
+              width: horizontalScale(300),
+              marginTop: verticalScale(30),
               alignSelf: 'center',
-              borderRadius: 12,
+              borderRadius: moderateScale(12),
               backgroundColor: 'white',
               borderColor: '#ddd',
               shadowColor: '#000',
@@ -60,13 +73,14 @@ const ChairScreen = (props) => {
               shadowOpacity: 0.1,
               shadowRadius: 5,
               elevation: 4,
+              marginBottom: verticalScale(12),
             }}>
             <Image
               style={{
-                height:'37%',
-                width: '55%',
+                height: verticalScale(155),
+                width: horizontalScale(220),
                 alignSelf: 'center',
-                marginTop: 24,
+                marginTop: verticalScale(15),
               }}
               source={{uri: item.product_images}}></Image>
 
@@ -74,37 +88,45 @@ const ChairScreen = (props) => {
               style={{
                 flexDirection: 'row',
                 justifyContent: 'center',
-                marginTop: 16,
+                marginTop: verticalScale(15),
               }}>
               <Text
                 style={{
-                  fontSize: 17,
+                  ffontSize: moderateScale(14.7),
                   color: 'black',
                   fontWeight: 'bold',
                   textAlign: 'center',
-                  marginBottom: 13,
+                  marginBottom: verticalScale(10),
                 }}>
                 {item.name}
               </Text>
 
               <Icon
-                style={{paddingLeft: 50}}
+                style={{paddingLeft: horizontalScale(40)}}
                 name="remove-red-eye"
-                size={21}></Icon>
+                size={20}></Icon>
               <Text
-                style={{fontSize: 14, marginLeft: 5, fontWeight: '600'}}>{`${
-                item.view_count * 0.5
-              }k`}</Text>
+                style={{
+                  fontSize: moderateScale(14),
+                  marginLeft: horizontalScale(5),
+                  fontWeight: '600',
+                }}>{`${item.view_count * 0.005}k`}</Text>
             </View>
 
             <StarRatingDisplay
               style={{alignSelf: 'center'}}
-              starSize={25}
+              starSize={22.6}
               rating={item.rating}></StarRatingDisplay>
             <Text
               numberOfLines={2}
               ellipsizeMode="tail"
-              style={{marginTop: 10, marginHorizontal: 25, fontSize: 16}}>
+              style={{
+                marginTop: verticalScale(10),
+                textAlign: 'left',
+                marginHorizontal: horizontalScale(25),
+                fontSize: moderateScale(14.3),
+                color: '#2E2E2E',
+              }}>
               {item.description}
             </Text>
 
@@ -112,30 +134,30 @@ const ChairScreen = (props) => {
               style={{
                 flexDirection: 'row',
                 alignSelf: 'center',
-                marginTop: 10,
+                marginTop: verticalScale(10),
               }}>
               <Text
                 style={{
                   color: '#A4A4A4',
                   fontWeight: 'black',
-                  marginTop: 2,
-                  fontSize: 17,
+                  marginTop: verticalScale(1.5),
+                  fontSize: moderateScale(15.8),
                   textDecorationLine: 'line-through',
-                  paddingHorizontal: 10,
+                  paddingHorizontal: horizontalScale(10),
                 }}>{`₹${item.cost}`}</Text>
               <Text
                 style={{
                   color: '#2E6BC6',
                   fontWeight: 'bold',
-                  fontSize: 19,
+                  fontSize: moderateScale(16.8),
                 }}>{`₹${item.cost}`}</Text>
 
               <Text
                 style={{
-                  paddingHorizontal: 10,
+                  paddingHorizontal: horizontalScale(10),
                   color: '#2E6BC6',
                   fontWeight: 'bold',
-                  fontSize: 15,
+                  fontSize: moderateScale(13.5),
                 }}>
                 (0% off)
               </Text>
@@ -143,8 +165,7 @@ const ChairScreen = (props) => {
           </TouchableOpacity>
         )}
       />
-
-    </View>
+    </SafeAreaView>
   );
 };
 

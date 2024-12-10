@@ -14,26 +14,30 @@ import {RadioButton} from 'react-native-paper';
 import {nanoid} from '@reduxjs/toolkit';
 import {useDispatch} from 'react-redux';
 import {addAddress} from '../redux/reducer';
+import {
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from '../assests/styles/Metrics';
 
 const Add_Address = props => {
-  // console.log("props",props.route.params.item)
-
   const dispatch = useDispatch();
-
-  const [checked, setChecked] = useState();
-  const [radiobuttonError, setRadioButtonError] = useState('');
 
   const [houseno, setHouseno] = useState('');
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [pincode, setPincode] = useState('');
+  const [addresstype, setAddresstype] = useState('');
+
+  // console.log(addresstype);
 
   const [housenoError, setHousenoError] = useState('');
   const [streetError, setStreetError] = useState('');
   const [cityError, setCityError] = useState('');
   const [stateError, setStateError] = useState('');
   const [pincodeError, setPincodeError] = useState('');
+  const [radiobuttonError, setRadioButtonError] = useState('');
 
   const handleSubmit = () => {
     let valid = true;
@@ -46,9 +50,6 @@ const Add_Address = props => {
     }
 
     if (street === '') {
-
-
-      
       setStreetError('Required');
       valid = false;
     } else {
@@ -79,7 +80,7 @@ const Add_Address = props => {
       setPincodeError('');
     }
 
-    if (checked === '') {
+    if (addresstype === '') {
       setRadioButtonError('Required');
       valid = false;
     } else {
@@ -94,7 +95,7 @@ const Add_Address = props => {
         city: city,
         state: state,
         pincode: pincode,
-        checked: checked,
+        addresstype: addresstype,
       };
       dispatch(addAddress(addressobject));
       props.navigation.navigate('Address');
@@ -104,15 +105,25 @@ const Add_Address = props => {
   };
 
   return (
-    <ScrollView style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{marginHorizontal: 12, borderWidth: 2}}>
+    <ScrollView style={{backgroundColor: 'white'}}>
+      <View
+        style={{
+          marginHorizontal: horizontalScale(12),
+          marginBottom: verticalScale(80),
+          flex: 1,
+        }}>
         <Image
-          style={{height: '12%', width: '50%', alignSelf: 'center'}}
-          source={require('../assests/images/address.jpg')}></Image>
+          style={{
+            height: verticalScale(110),
+            width: horizontalScale(130),
+            alignSelf: 'center',
+          }}
+          source={require('../assests/images/add.jpg')}
+          resizeMode="cover"></Image>
         <Text
           style={{
-            fontSize: 15,
-            marginTop: 10,
+            fontSize: moderateScale(14),
+            marginTop: verticalScale(10),
             fontWeight: '400',
             color: 'black',
           }}>
@@ -121,33 +132,46 @@ const Add_Address = props => {
 
         <View
           style={{
-            marginTop: 10,
+            marginTop: verticalScale(10),
             flexDirection: 'row',
             borderWidth: 3,
-            borderRadius: 8,
+            borderRadius: moderateScale(8),
             borderColor: '#ccc',
           }}>
           <Icon
-            style={{marginTop: 12, marginLeft: 5}}
+            style={{
+              marginTop: verticalScale(12),
+              marginLeft: horizontalScale(7),
+            }}
             name={'home'}
-            size={23}
+            size={20}
             color={'grey'}></Icon>
           <TextInput
             value={houseno}
             onChangeText={text => setHouseno(text)}
-            style={{height: 47, width: '85%', marginLeft: 10}}></TextInput>
+            style={{
+              height: verticalScale(40),
+              width: '80%',
+              marginLeft: horizontalScale(10),
+              // borderWidth: 2,
+            }}></TextInput>
         </View>
         {housenoError ? (
           <Text
-            style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
+            style={{
+              color: 'red',
+              fontSize: moderateScale(13),
+              marginTop: verticalScale(3),
+              marginLeft: horizontalScale(5),
+            }}>
             {housenoError}
           </Text>
         ) : null}
 
         <Text
           style={{
-            fontSize: 15,
-            marginTop: 10,
+            fontSize: moderateScale(14),
+            marginTop: verticalScale(10),
             fontWeight: '400',
             color: 'black',
           }}>
@@ -156,33 +180,46 @@ const Add_Address = props => {
 
         <View
           style={{
-            marginTop: 10,
+            marginTop: verticalScale(10),
             flexDirection: 'row',
             borderWidth: 3,
-            borderRadius: 8,
+            borderRadius: moderateScale(8),
             borderColor: '#ccc',
           }}>
           <Icon
-            style={{marginTop: 12, marginLeft: 5}}
+            style={{
+              marginTop: verticalScale(12),
+              marginLeft: horizontalScale(8),
+            }}
             name={'address'}
-            size={23}
+            size={20}
             color={'grey'}></Icon>
           <TextInput
             value={street}
             onChangeText={text => setStreet(text)}
-            style={{height: 47, width: '85%', marginLeft: 10}}></TextInput>
+            style={{
+              height: verticalScale(40),
+              width: '80%',
+              marginLeft: horizontalScale(10),
+              // borderWidth: 2,
+            }}></TextInput>
         </View>
         {streetError ? (
           <Text
-            style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
+            style={{
+              color: 'red',
+              fontSize: moderateScale(13),
+              marginTop: verticalScale(3),
+              marginLeft: horizontalScale(5),
+            }}>
             {streetError}
           </Text>
         ) : null}
 
         <Text
           style={{
-            fontSize: 15,
-            marginTop: 10,
+            fontSize: moderateScale(14),
+            marginTop: verticalScale(10),
             fontWeight: '400',
             color: 'black',
           }}>
@@ -198,26 +235,39 @@ const Add_Address = props => {
             borderColor: '#ccc',
           }}>
           <Icon1
-            style={{marginTop: 12, marginLeft: 5}}
+            style={{
+              marginTop: verticalScale(12),
+              marginLeft: horizontalScale(7),
+            }}
             name={'city'}
-            size={23}
+            size={20}
             color={'grey'}></Icon1>
           <TextInput
             value={city}
             onChangeText={text => setCity(text)}
-            style={{height: 47, width: '85%', marginLeft: 10}}></TextInput>
+            style={{
+              height: verticalScale(40),
+              width: '80%',
+              marginLeft: horizontalScale(10),
+              // borderWidth: 2,
+            }}></TextInput>
         </View>
         {cityError ? (
           <Text
-            style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
+            style={{
+              color: 'red',
+              fontSize: moderateScale(13),
+              marginTop: verticalScale(3),
+              marginLeft: horizontalScale(5),
+            }}>
             {cityError}
           </Text>
         ) : null}
 
         <Text
           style={{
-            fontSize: 15,
-            marginTop: 10,
+            fontSize: moderateScale(14),
+            marginTop: verticalScale(10),
             fontWeight: '400',
             color: 'black',
           }}>
@@ -233,26 +283,39 @@ const Add_Address = props => {
             borderColor: '#ccc',
           }}>
           <Icon1
-            style={{marginTop: 12, marginLeft: 5}}
+            style={{
+              marginTop: verticalScale(12),
+              marginLeft: horizontalScale(7),
+            }}
             name={'pine-tree'}
-            size={23}
+            size={20}
             color={'grey'}></Icon1>
           <TextInput
             value={state}
             onChangeText={text => setState(text)}
-            style={{height: 47, width: '85%', marginLeft: 10}}></TextInput>
+            style={{
+              height: verticalScale(40),
+              width: '80%',
+              marginLeft: horizontalScale(10),
+              // borderWidth: 2,
+            }}></TextInput>
         </View>
         {stateError ? (
           <Text
-            style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
+            style={{
+              color: 'red',
+              fontSize: moderateScale(13),
+              marginTop: verticalScale(3),
+              marginLeft: horizontalScale(5),
+            }}>
             {stateError}
           </Text>
         ) : null}
 
         <Text
           style={{
-            fontSize: 15,
-            marginTop: 10,
+            fontSize: moderateScale(14),
+            marginTop: verticalScale(10),
             fontWeight: '400',
             color: 'black',
           }}>
@@ -268,28 +331,41 @@ const Add_Address = props => {
             borderColor: '#ccc',
           }}>
           <Icon1
-            style={{marginTop: 12, marginLeft: 5}}
+            style={{
+              marginTop: verticalScale(12),
+              marginLeft: horizontalScale(7),
+            }}
             name={'pin'}
-            size={23}
+            size={20}
             color={'grey'}></Icon1>
           <TextInput
             value={pincode}
             onChangeText={text => setPincode(text)}
             keyboardType="numeric"
             maxLength={6}
-            style={{height: 47, width: '85%', marginLeft: 10}}></TextInput>
+            style={{
+              height: verticalScale(40),
+              width: '80%',
+              marginLeft: horizontalScale(10),
+              // borderWidth: 2,
+            }}></TextInput>
         </View>
         {pincodeError ? (
           <Text
-            style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
+            style={{
+              color: 'red',
+              fontSize: moderateScale(13),
+              marginTop: verticalScale(3),
+              marginLeft: horizontalScale(5),
+            }}>
             {pincodeError}
           </Text>
         ) : null}
 
         <Text
           style={{
-            fontSize: 15,
-            marginTop: 10,
+            fontSize: moderateScale(14),
+            marginTop: verticalScale(10),
             fontWeight: '400',
             color: 'black',
           }}>
@@ -300,19 +376,19 @@ const Add_Address = props => {
           style={{
             flexDirection: 'row',
             justifyContent: 'space-evenly',
-            marginTop: 10,
+            marginTop: verticalScale(12),
           }}>
           <RadioButton
             color="#2E6BC6"
             value="Home"
-            status={checked === 'Home' ? 'checked' : 'unchecked'}
+            status={addresstype === 'Home' ? 'checked' : 'unchecked'}
             onPress={() => {
-              setChecked('Home'), setRadioButtonError('');
+              setAddresstype('Home'), setRadioButtonError('');
             }}></RadioButton>
           <Text
             style={{
-              fontSize: 15,
-              marginTop: 5,
+              fontSize: moderateScale(14),
+              marginTop: verticalScale(5),
               fontWeight: '400',
               color: 'black',
             }}>
@@ -321,14 +397,14 @@ const Add_Address = props => {
           <RadioButton
             color="#2E6BC6"
             value="Office"
-            status={checked === 'Office' ? 'checked' : 'unchecked'}
+            status={addresstype === 'Office' ? 'checked' : 'unchecked'}
             onPress={() => {
-              setChecked('Office'), setRadioButtonError('');
+              setAddresstype('Office'), setRadioButtonError('');
             }}></RadioButton>
           <Text
             style={{
-              fontSize: 15,
-              marginTop: 5,
+              fontSize: moderateScale(14),
+              marginTop: verticalScale(5),
               fontWeight: '400',
               color: 'black',
             }}>
@@ -338,14 +414,14 @@ const Add_Address = props => {
           <RadioButton
             color="#2E6BC6"
             value="other"
-            status={checked === 'Other' ? 'checked' : 'unchecked'}
+            status={addresstype === 'Other' ? 'checked' : 'unchecked'}
             onPress={() => {
-              setChecked('Other'), setRadioButtonError('');
+              setAddresstype('Other'), setRadioButtonError('');
             }}></RadioButton>
           <Text
             style={{
-              fontSize: 15,
-              marginTop: 5,
+              fontSize: moderateScale(14),
+              marginTop: verticalScale(5),
               fontWeight: '400',
               color: 'black',
             }}>
@@ -355,7 +431,12 @@ const Add_Address = props => {
 
         {radiobuttonError ? (
           <Text
-            style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
+            style={{
+              color: 'red',
+              fontSize: moderateScale(13),
+              marginTop: verticalScale(3),
+              marginLeft: horizontalScale(5),
+            }}>
             {radiobuttonError}
           </Text>
         ) : null}
@@ -364,12 +445,18 @@ const Add_Address = props => {
           onPress={() => handleSubmit()}
           style={{
             backgroundColor: '#2E6BC6',
-            padding: 8,
-            marginTop: 20,
-            borderRadius: 7,
-            marginHorizontal: 60,
+            padding: horizontalScale(7.5),
+            marginTop: verticalScale(20),
+            borderRadius: moderateScale(7),
+            marginHorizontal: horizontalScale(85),
           }}>
-          <Text style={{fontSize: 17, color: 'white', textAlign: 'center'}}>
+          <Text
+            style={{
+              fontSize: moderateScale(15.4),
+              color: 'white',
+              textAlign: 'center',
+              fontWeight: 500,
+            }}>
             Submit
           </Text>
         </TouchableOpacity>

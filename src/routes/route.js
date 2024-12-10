@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon1 from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Feather';
 import Icon3 from 'react-native-vector-icons/AntDesign';
+import Icon4 from 'react-native-vector-icons/MaterialCommunityIcons';
 import UserprofileScreen from '../screens/UserprofileScreen';
 import TableScreen from '../screens/TableScreen';
 import ProductDetails from '../screens/ProductDetails';
@@ -19,19 +20,55 @@ import ChangePassword from '../screens/ChangePassword';
 import {TouchableOpacity} from 'react-native';
 import Add_Address from '../screens/Addaddresss';
 import {useSelector} from 'react-redux';
+import Checkout from '../screens/Checkout';
+import Myorders from '../screens/Myorders';
+import OrderDetails from '../screens/OrderDetails';
+import SearchScreen from '../screens/ProductSearch';
+import MapScreen from '../screens/MapScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const HomeStack = props => {
-  // console.log('HELLO', props);
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="HomeStack" component={HomeScreen} />
-      <Stack.Screen name="Table" component={TableScreen} />
-      <Stack.Screen name="Chair" component={ChairScreen} />
-      <Stack.Screen name="Sofa" component={SofaScreen} />
-      <Stack.Screen name="Beds" component={BedsScreen} />
+      <Stack.Screen name="HomeStack" component={HomeScreen}></Stack.Screen>
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          title: 'Table',
+          headerTitleAlign: 'center',
+        }}
+        name="Table"
+        component={TableScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          title: 'Chair',
+          headerTitleAlign: 'center',
+        }}
+        name="Chair"
+        component={ChairScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          title: 'Sofa',
+          headerTitleAlign: 'center',
+        }}
+        name="Sofa"
+        component={SofaScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          title: 'Beds',
+          headerTitleAlign: 'center',
+        }}
+        name="Beds"
+        component={BedsScreen}
+      />
       <Stack.Screen name="ProductDetails" component={ProductDetails} />
       <Stack.Screen
         options={{
@@ -57,9 +94,57 @@ const HomeStack = props => {
         }}
         name="Add_Address"
         component={Add_Address}></Stack.Screen>
+
       <Stack.Screen
+        options={{
+          headerShown: true,
+          title: 'Checkout',
+          headerTitleAlign: 'center',
+        }}
+        name="checkout"
+        component={Checkout}></Stack.Screen>
+    </Stack.Navigator>
+  );
+};
+
+const ProfileStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          title: 'Profile',
+          headerTitleAlign: 'center',
+        }}
+        name="Profile"
+        component={UserprofileScreen}></Stack.Screen>
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          title: 'My Orders',
+          headerTitleAlign: 'center',
+        }}
+        name="myorders"
+        component={Myorders}></Stack.Screen>
+
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          title: 'Order Details',
+          headerTitleAlign: 'center',
+        }}
+        name="orderdetails"
+        component={OrderDetails}></Stack.Screen>
+
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          title: 'Update Details',
+          headerTitleAlign: 'center',
+        }}
         name="UpdateDetails"
         component={UpdateDetails}></Stack.Screen>
+
       <Stack.Screen
         name="ChangePassword"
         component={ChangePassword}></Stack.Screen>
@@ -68,7 +153,6 @@ const HomeStack = props => {
 };
 
 const MyTabs = () => {
-  
   const cartCount = useSelector(state => state.cart.cartCount);
 
   console.log('cartCount>>>', cartCount);
@@ -88,13 +172,31 @@ const MyTabs = () => {
         name="Home"
         component={HomeStack}
       />
+
+      <Tab.Screen
+        options={{
+          tabBarIcon: () => (
+            <Icon3 name="search1" size={21} color={'black'}></Icon3>
+          ),
+        }}
+        name="search"
+        component={SearchScreen}></Tab.Screen>
+
+      <Tab.Screen
+        options={{
+          tabBarIcon: () => (
+            <Icon4 name="google-maps" size={21} color={'black'}></Icon4>
+          ),
+        }}
+        name="Map"
+        component={MapScreen}></Tab.Screen>
+
       <Tab.Screen
         options={{
           tabBarIcon: () => (
             <Icon1 name={'shoppingcart'} size={25} color={'black'}></Icon1>
           ),
-          // tabBarBadge: 0,
-          tabBarBadge: cartCount > 0 ? cartCount : null, // Show badge only if cartCount > 0
+          tabBarBadge: cartCount > 0 ? cartCount : null,
           tabBarBadgeStyle: {backgroundColor: '#2E6BC6'},
         }}
         name="Cart"
@@ -108,7 +210,7 @@ const MyTabs = () => {
           ),
         }}
         name="Profile"
-        component={UserprofileScreen}
+        component={ProfileStack}
       />
     </Tab.Navigator>
   );

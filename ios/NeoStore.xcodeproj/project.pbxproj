@@ -13,6 +13,8 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		3CA3F3A35B7745B187CD1DDE /* Helvetica-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECA3BDEC324A4FA18183D508 /* Helvetica-Bold.ttf */; };
+		3DEB78CC82BC4DE0BDA6D72E /* Helvetica.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 914E789D8D1C4C389E2CAD10 /* Helvetica.ttf */; };
 		440DC8B6694C4777B2EFFEC4 /* NotoSansJP-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4D3C9B53EE049A08171F929 /* NotoSansJP-Regular.ttf */; };
 		746973836DD68D1BCA12A04F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = AF15B53E6992A0EB057327F2 /* PrivacyInfo.xcprivacy */; };
 		7699B88040F8A987B510C191 /* libPods-NeoStore-NeoStoreTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-NeoStore-NeoStoreTests.a */; };
@@ -37,8 +39,6 @@
 		B5E571DA2CB3E2DF00669B6C /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5E571C62CB3E2DF00669B6C /* SimpleLineIcons.ttf */; };
 		B5E571DB2CB3E2DF00669B6C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5E571C72CB3E2DF00669B6C /* Zocial.ttf */; };
 		E86D32C0DE2E43C396C2ABD5 /* Sono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3446E653A254E079B3D76B8 /* Sono-Regular.ttf */; };
-		3DEB78CC82BC4DE0BDA6D72E /* Helvetica.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 914E789D8D1C4C389E2CAD10 /* Helvetica.ttf */; };
-		3CA3F3A35B7745B187CD1DDE /* Helvetica-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECA3BDEC324A4FA18183D508 /* Helvetica-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +69,7 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-NeoStore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NeoStore.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = NeoStore/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-NeoStore-NeoStoreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeoStore-NeoStoreTests.release.xcconfig"; path = "Target Support Files/Pods-NeoStore-NeoStoreTests/Pods-NeoStore-NeoStoreTests.release.xcconfig"; sourceTree = "<group>"; };
+		914E789D8D1C4C389E2CAD10 /* Helvetica.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Helvetica.ttf; path = ../src/assests/fonts/Helvetica.ttf; sourceTree = "<group>"; };
 		A5AC71D6C3684DBEACAA0387 /* RobotoMono-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "RobotoMono-SemiBold.ttf"; path = "../src/assests/fonts/RobotoMono-SemiBold.ttf"; sourceTree = "<group>"; };
 		AF15B53E6992A0EB057327F2 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = NeoStore/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		B5E571B52CB3E2DF00669B6C /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
@@ -92,9 +93,8 @@
 		B5E571C72CB3E2DF00669B6C /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
 		C3446E653A254E079B3D76B8 /* Sono-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Sono-Regular.ttf"; path = "../src/assests/fonts/Sono-Regular.ttf"; sourceTree = "<group>"; };
 		C4D3C9B53EE049A08171F929 /* NotoSansJP-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansJP-Regular.ttf"; path = "../src/assests/fonts/NotoSansJP-Regular.ttf"; sourceTree = "<group>"; };
+		ECA3BDEC324A4FA18183D508 /* Helvetica-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Helvetica-Bold.ttf"; path = "../src/assests/fonts/Helvetica-Bold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		914E789D8D1C4C389E2CAD10 /* Helvetica.ttf */ = {isa = PBXFileReference; name = "Helvetica.ttf"; path = "../src/assests/fonts/Helvetica.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		ECA3BDEC324A4FA18183D508 /* Helvetica-Bold.ttf */ = {isa = PBXFileReference; name = "Helvetica-Bold.ttf"; path = "../src/assests/fonts/Helvetica-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

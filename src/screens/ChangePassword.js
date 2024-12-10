@@ -4,6 +4,11 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/Entypo';
+import {
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from '../assests/styles/Metrics';
 
 const ChangePassword = props => {
   var passwordregex =
@@ -133,36 +138,37 @@ const ChangePassword = props => {
   }
 
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{marginTop: 80}}>
+    <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
+      <View>
         <View
           style={{
-            marginHorizontal: 15,
-            marginLeft: 50,
+            marginLeft: horizontalScale(45),
             backgroundColor: 'white',
             position: 'absolute',
-            marginTop: 20,
             zIndex: 99,
           }}>
-          <Text style={{color: 'black', fontSize: 18}}> Password change </Text>
+          <Text style={{color: 'black', fontSize: moderateScale(16.5)}}>
+            {' '}
+            Password change{' '}
+          </Text>
         </View>
 
         <View
           style={{
             borderWidth: 3,
-            height: 475,
-            borderRadius: 10,
+            height: verticalScale(410),
+            borderRadius: moderateScale(10),
             borderColor: '#ccc',
-            marginHorizontal: 15,
-            marginTop: 40,
+            marginHorizontal: horizontalScale(16),
+            marginTop: verticalScale(10),
           }}>
           <Text
             style={{
-              marginTop: 30,
-              marginLeft: 23,
+              marginTop: verticalScale(25),
+              marginLeft: horizontalScale(20),
               color: 'black',
               fontWeight: '400',
-              fontSize: 15,
+              fontSize: moderateScale(14),
             }}>
             Current password
           </Text>
@@ -172,28 +178,37 @@ const ChangePassword = props => {
               borderWidth: 3,
               borderColor: '#ccc',
               flexDirection: 'row',
-              marginTop: 10,
-              borderRadius: 8,
-              marginHorizontal: 20,
+              marginTop: verticalScale(10),
+              borderRadius: moderateScale(8),
+              marginHorizontal: horizontalScale(20),
+              // backgroundColor: 'red',
             }}>
             <TextInput
               onChangeText={text => setCurrentPassword(text)}
               onBlur={validatecurrentpassword}
               secureTextEntry={secure1}
               style={{
-                width: '78%',
+                // borderWidth: 2,
+                height: verticalScale(40),
+                width: '75%',
               }}></TextInput>
             {secure1 === false ? (
               <TouchableOpacity
                 onPress={() => setSecure1(!secure1)}
-                style={{marginTop: 13, marginLeft: 25}}>
-                <Icon name="eye" size={23} color="grey"></Icon>
+                style={{
+                  marginTop: verticalScale(10),
+                  marginLeft: horizontalScale(25),
+                }}>
+                <Icon name="eye" size={21} color="grey"></Icon>
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
                 onPress={() => setSecure1(!secure1)}
-                style={{marginTop: 13, marginLeft: 25}}>
-                <Icon1 name="eye-with-line" size={23} color="grey"></Icon1>
+                style={{
+                  marginTop: verticalScale(10),
+                  marginLeft: horizontalScale(25),
+                }}>
+                <Icon1 name="eye-with-line" size={21} color="grey"></Icon1>
               </TouchableOpacity>
             )}
           </View>
@@ -201,9 +216,9 @@ const ChangePassword = props => {
             <Text
               style={{
                 color: 'red',
-                fontSize: 14,
-                marginTop: 3,
-                marginLeft: 21,
+                fontSize: moderateScale(12.5),
+                marginTop: verticalScale(4),
+                marginLeft: horizontalScale(21),
               }}>
               {currentpasswordError}
             </Text>
@@ -211,11 +226,11 @@ const ChangePassword = props => {
 
           <Text
             style={{
-              marginTop: 15,
-              marginLeft: 23,
+              marginTop: verticalScale(13),
+              marginLeft: horizontalScale(20),
               color: 'black',
               fontWeight: '400',
-              fontSize: 15,
+              fontSize: moderateScale(14),
             }}>
             New password
           </Text>
@@ -224,38 +239,47 @@ const ChangePassword = props => {
               borderWidth: 3,
               borderColor: '#ccc',
               flexDirection: 'row',
-              marginTop: 10,
-              borderRadius: 8,
-              marginHorizontal: 20,
+              marginTop: verticalScale(10),
+              borderRadius: moderateScale(8),
+              marginHorizontal: horizontalScale(20),
+              // backgroundColor: 'red',
             }}>
             <TextInput
               onChangeText={text => setNewPassword(text)}
               onBlur={validatenewpassword}
               secureTextEntry={false}
               style={{
-                width: '78%',
+                // borderWidth: 2,
+                height: verticalScale(40),
+                width: '75%',
               }}></TextInput>
             {secure2 === false ? (
               <TouchableOpacity
                 onPress={() => setSecure2(!secure2)}
-                style={{marginTop: 13, marginLeft: 25}}>
-                <Icon name="eye" size={23} color="grey"></Icon>
+                style={{
+                  marginTop: verticalScale(10),
+                  marginLeft: horizontalScale(25),
+                }}>
+                <Icon name="eye" size={21} color="grey"></Icon>
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
                 onPress={() => setSecure2(!secure2)}
-                style={{marginTop: 13, marginLeft: 25}}>
-                <Icon1 name="eye-with-line" size={23} color="grey"></Icon1>
+                style={{
+                  marginTop: verticalScale(10),
+                  marginLeft: horizontalScale(25),
+                }}>
+                <Icon1 name="eye-with-line" size={21} color="grey"></Icon1>
               </TouchableOpacity>
             )}
           </View>
           {newpasswordError ? (
             <Text
               style={{
+                fontSize: moderateScale(12.5),
+                marginTop: verticalScale(4),
+                marginLeft: horizontalScale(21),
                 color: 'red',
-                fontSize: 14,
-                marginTop: 3,
-                marginLeft: 21,
               }}>
               {newpasswordError}
             </Text>
@@ -263,11 +287,11 @@ const ChangePassword = props => {
 
           <Text
             style={{
-              marginTop: 15,
-              marginLeft: 23,
+              marginTop: verticalScale(13),
+              marginLeft: horizontalScale(20),
               color: 'black',
               fontWeight: '400',
-              fontSize: 15,
+              fontSize: moderateScale(14),
             }}>
             Confirm new password
           </Text>
@@ -276,38 +300,47 @@ const ChangePassword = props => {
               borderWidth: 3,
               borderColor: '#ccc',
               flexDirection: 'row',
-              marginTop: 10,
-              borderRadius: 8,
-              marginHorizontal: 20,
+              marginTop: verticalScale(10),
+              borderRadius: moderateScale(8),
+              marginHorizontal: horizontalScale(20),
+              // backgroundColor: 'red',
             }}>
             <TextInput
               onChangeText={text => setConfirmNewPassword(text)}
               onBlur={validateConfirmNewpassword}
               secureTextEntry={false}
               style={{
-                width: '78%',
+                // borderWidth: 2,
+                height: verticalScale(40),
+                width: '75%',
               }}></TextInput>
             {secure3 === false ? (
               <TouchableOpacity
                 onPress={() => setSecure3(!secure3)}
-                style={{marginTop: 13, marginLeft: 25}}>
-                <Icon name="eye" size={23} color="grey"></Icon>
+                style={{
+                  marginTop: verticalScale(10),
+                  marginLeft: horizontalScale(25),
+                }}>
+                <Icon name="eye" size={21} color="grey"></Icon>
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
                 onPress={() => setSecure3(!secure3)}
-                style={{marginTop: 13, marginLeft: 25}}>
-                <Icon1 name="eye-with-line" size={23} color="grey"></Icon1>
+                style={{
+                  marginTop: verticalScale(10),
+                  marginLeft: horizontalScale(25),
+                }}>
+                <Icon1 name="eye-with-line" size={21} color="grey"></Icon1>
               </TouchableOpacity>
             )}
           </View>
           {confirmpasswordError ? (
             <Text
               style={{
+                fontSize: moderateScale(12.5),
+                marginTop: verticalScale(4),
+                marginLeft: horizontalScale(21),
                 color: 'red',
-                fontSize: 14,
-                marginTop: 3,
-                marginLeft: 21,
               }}>
               {confirmpasswordError}
             </Text>
@@ -317,18 +350,18 @@ const ChangePassword = props => {
             onPress={handleSaveChanges}
             style={{
               backgroundColor: '#2E6BC6',
-              marginTop: 30,
-              marginHorizontal: 110,
-              borderRadius: 10,
-              padding: 6,
+              marginTop: verticalScale(25),
+              marginHorizontal: horizontalScale(100),
+              borderRadius: moderateScale(10),
+              padding: horizontalScale(5),
             }}>
             <Text
               style={{
                 textAlign: 'center',
-                fontSize: 17,
+                fontSize: moderateScale(15),
                 color: 'white',
                 fontFamily: 'RobotoMono-SemiBold',
-                padding: 4,
+                padding: horizontalScale(4),
               }}>
               Save Changes
             </Text>

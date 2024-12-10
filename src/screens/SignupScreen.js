@@ -22,10 +22,12 @@ import Icon7 from 'react-native-vector-icons/FontAwesome';
 import Icon8 from 'react-native-vector-icons/Entypo';
 import axios from 'axios';
 
-
-
-
 import {RadioButton} from 'react-native-paper';
+import {
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from '../assests/styles/Metrics';
 
 const SignupScreen = props => {
   var emailregex = /[a-zA-Z0-9\.\-_]+[@]+[a-z]+[\.]+[a-z]{2,3}/;
@@ -33,9 +35,9 @@ const SignupScreen = props => {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&^])[A-Za-z\d@.#$!%*?&]*$/;
 
   const [checked, setChecked] = useState('');
-  const [genderError, setGenderError] = useState(''); 
+  const [genderError, setGenderError] = useState('');
 
-  const [secure, setSecure] = useState(false);
+  const [secure, setSecure] = useState(true);
 
   const [firstname, setFirstname] = useState('');
 
@@ -55,9 +57,6 @@ const SignupScreen = props => {
   const [passwordError, setPasswordError] = useState('');
   const [confirmpasswordError, setConfirmPasswordError] = useState('');
   const [phonenumberError, setPhonenumberError] = useState('');
-
-
- 
 
   const validateFirstname = () => {
     if (!firstname) {
@@ -209,8 +208,6 @@ const SignupScreen = props => {
     }
   };
 
-
-
   async function postApiData() {
     const formData = new FormData();
     formData.append('first_name', firstname);
@@ -232,53 +229,61 @@ const SignupScreen = props => {
         },
       );
       console.log('The data', result?.data, result?.data?.data?.access_token);
-      
 
       if (result.status === 200) {
-        Alert.alert('Registeration Successful')
-        props.navigation.navigate('Login')
+        Alert.alert('Registeration Successful');
+        props.navigation.navigate('Login');
+      } else {
+        Alert.alert('Error');
       }
-      else 
-      {
-        Alert.alert("Error")
-      }
-
     } catch (error) {
-      console.log(error.response ? error?.response.data : error?.message);
+      if (error.response) {
+        console.log('Error response:', error.response.data);
+
+        if (error.response.status === 422) {
+          Alert.alert('Email id already exist');
+        } else {
+          Alert.alert('Please try again later.');
+        }
+      } else {
+        console.log('Error message:', error.message);
+        Alert.alert('Please try again later.');
+      }
     }
   }
   return (
     <SafeAreaView>
       <ScrollView>
-        <View>
+        <View style={{marginTop: verticalScale(15)}}>
           <Logo />
         </View>
 
         <View
           style={{
-            height: '100%',
-            borderWidth: 2,
-            marginTop: 20,
-            marginHorizontal: 15,
-            paddingHorizontal: 10,
+            height: '91%',
+            borderWidth: moderateScale(2),
+            marginTop: verticalScale(20),
+            marginHorizontal: horizontalScale(15),
+            paddingHorizontal: horizontalScale(10),
             elevation: 2,
             borderColor: '#E0E0E0',
+            marginBottom: verticalScale(50),
           }}>
           <Text
             style={{
-              fontSize: 22,
-              fontWeight: '630',
+              fontSize: moderateScale(20),
+              fontWeight: '600',
               color: 'black',
               fontFamily: 'RobotoMono-SemiBold',
-              marginTop: 7,
+              marginTop: verticalScale(7),
             }}>
             Create Account
           </Text>
 
           <Text
             style={{
-              fontSize: 15,
-              marginTop: 10,
+              fontSize: moderateScale(14),
+              marginTop: verticalScale(10),
               fontWeight: '400',
               color: 'black',
             }}>
@@ -287,14 +292,17 @@ const SignupScreen = props => {
 
           <View
             style={{
-              marginTop: 10,
+              marginTop: verticalScale(10),
               flexDirection: 'row',
               borderWidth: 3,
-              borderRadius: 8,
+              borderRadius: moderateScale(8),
               borderColor: '#ccc',
             }}>
             <Icon1
-              style={{marginTop: 12, marginLeft: 5}}
+              style={{
+                marginTop: verticalScale(10.5),
+                marginLeft: horizontalScale(6),
+              }}
               name={'user'}
               size={23}
               color={'grey'}></Icon1>
@@ -302,19 +310,29 @@ const SignupScreen = props => {
               value={firstname}
               onChangeText={text => setFirstname(text)}
               onBlur={validateFirstname}
-              style={{height: 47, width: '85%', marginLeft: 10}}></TextInput>
+              style={{
+                height: verticalScale(43),
+                width: horizontalScale(240),
+                // borderWidth: 2,
+                marginLeft: horizontalScale(10),
+              }}></TextInput>
           </View>
           {firtnameError ? (
             <Text
-              style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
+              style={{
+                color: 'red',
+                fontSize: moderateScale(12.5),
+                marginTop: verticalScale(3),
+                marginLeft: horizontalScale(5),
+              }}>
               {firtnameError}
             </Text>
           ) : null}
 
           <Text
             style={{
-              fontSize: 15,
-              marginTop: 10,
+              fontSize: moderateScale(14),
+              marginTop: verticalScale(10),
               fontWeight: '400',
               color: 'black',
             }}>
@@ -323,14 +341,17 @@ const SignupScreen = props => {
 
           <View
             style={{
-              marginTop: 10,
+              marginTop: verticalScale(10),
               flexDirection: 'row',
               borderWidth: 3,
-              borderRadius: 8,
+              borderRadius: moderateScale(8),
               borderColor: '#ccc',
             }}>
             <Icon2
-              style={{marginTop: 12, marginLeft: 5}}
+              style={{
+                marginTop: verticalScale(10.5),
+                marginLeft: horizontalScale(6),
+              }}
               name={'address-card'}
               size={23}
               color={'grey'}></Icon2>
@@ -338,19 +359,29 @@ const SignupScreen = props => {
               value={lastname}
               onChangeText={text => setLastname(text)}
               onBlur={validateLastname}
-              style={{height: 47, width: '85%', marginLeft: 10}}></TextInput>
+              style={{
+                height: verticalScale(43),
+                width: horizontalScale(240),
+                // borderWidth: 2,
+                marginLeft: horizontalScale(10),
+              }}></TextInput>
           </View>
           {lastnameError ? (
             <Text
-              style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
+              style={{
+                color: 'red',
+                fontSize: moderateScale(12.5),
+                marginTop: verticalScale(3),
+                marginLeft: horizontalScale(5),
+              }}>
               {lastnameError}
             </Text>
           ) : null}
 
           <Text
             style={{
-              fontSize: 15,
-              marginTop: 10,
+              fontSize: moderateScale(14),
+              marginTop: verticalScale(10),
               fontWeight: '400',
               color: 'black',
             }}>
@@ -359,14 +390,17 @@ const SignupScreen = props => {
 
           <View
             style={{
-              marginTop: 10,
+              marginTop: verticalScale(10),
               flexDirection: 'row',
               borderWidth: 3,
-              borderRadius: 8,
+              borderRadius: moderateScale(8),
               borderColor: '#ccc',
             }}>
             <Icon3
-              style={{marginTop: 12, marginLeft: 6}}
+              style={{
+                marginTop: verticalScale(10.5),
+                marginLeft: horizontalScale(6),
+              }}
               name={'email'}
               size={23}
               color={'grey'}></Icon3>
@@ -374,19 +408,29 @@ const SignupScreen = props => {
               value={email}
               onChangeText={text => setEmail(text)}
               onBlur={validateEmail}
-              style={{height: 47, width: '85%', marginLeft: 10}}></TextInput>
+              style={{
+                height: verticalScale(43),
+                width: horizontalScale(240),
+                // borderWidth: 2,
+                marginLeft: horizontalScale(10),
+              }}></TextInput>
           </View>
           {emailError ? (
             <Text
-              style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
+              style={{
+                color: 'red',
+                fontSize: moderateScale(12.5),
+                marginTop: verticalScale(3),
+                marginLeft: horizontalScale(5),
+              }}>
               {emailError}
             </Text>
           ) : null}
 
           <Text
             style={{
-              fontSize: 15,
-              marginTop: 10,
+              fontSize: moderateScale(14),
+              marginTop: verticalScale(10),
               fontWeight: '400',
               color: 'black',
             }}>
@@ -395,14 +439,17 @@ const SignupScreen = props => {
 
           <View
             style={{
-              marginTop: 10,
+              marginTop: verticalScale(10),
               flexDirection: 'row',
               borderWidth: 3,
-              borderRadius: 8,
+              borderRadius: moderateScale(8),
               borderColor: '#ccc',
             }}>
             <Icon4
-              style={{marginTop: 12, marginLeft: 5}}
+              style={{
+                marginTop: verticalScale(10.5),
+                marginLeft: horizontalScale(6),
+              }}
               name={'lock'}
               size={23}
               color={'grey'}></Icon4>
@@ -412,39 +459,48 @@ const SignupScreen = props => {
               onBlur={validatePassword}
               secureTextEntry={secure}
               style={{
-                height: 47,
-                marginLeft: 10,
-                width: '74%',
+                height: verticalScale(43),
+                width: horizontalScale(230),
+                // borderWidth: 2,
+                marginLeft: horizontalScale(10),
               }}></TextInput>
 
             {secure === false ? (
               <TouchableOpacity
-                style={{marginTop: 12, marginLeft: 12}}
+                style={{
+                  marginTop: verticalScale(12),
+                  marginLeft: horizontalScale(10),
+                }}
                 onPress={() => setSecure(!secure)}>
                 <Icon7 name={'eye'} size={23} color={'grey'}></Icon7>
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
-                style={{marginTop: 12, marginLeft: 12}}
+                style={{
+                  marginTop: verticalScale(12),
+                  marginLeft: horizontalScale(10),
+                }}
                 onPress={() => setSecure(!secure)}>
-                <Icon8
-                  name={'eye-with-line'}
-                  size={23}
-                  color={'grey'}></Icon8>
+                <Icon8 name={'eye-with-line'} size={23} color={'grey'}></Icon8>
               </TouchableOpacity>
             )}
           </View>
           {passwordError ? (
             <Text
-              style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
+              style={{
+                color: 'red',
+                fontSize: moderateScale(12.5),
+                marginTop: verticalScale(3),
+                marginLeft: horizontalScale(5),
+              }}>
               {passwordError}
             </Text>
           ) : null}
 
           <Text
             style={{
-              fontSize: 15,
-              marginTop: 10,
+              fontSize: moderateScale(14),
+              marginTop: verticalScale(10),
               fontWeight: '400',
               color: 'black',
             }}>
@@ -453,14 +509,17 @@ const SignupScreen = props => {
 
           <View
             style={{
-              marginTop: 10,
+              marginTop: verticalScale(10),
               flexDirection: 'row',
               borderWidth: 3,
-              borderRadius: 8,
+              borderRadius: moderateScale(8),
               borderColor: '#ccc',
             }}>
             <Icon5
-              style={{marginTop: 12, marginLeft: 5}}
+              style={{
+                marginTop: verticalScale(10.5),
+                marginLeft: horizontalScale(6),
+              }}
               name={'lock'}
               size={23}
               color={'grey'}></Icon5>
@@ -468,19 +527,29 @@ const SignupScreen = props => {
               value={confirmpassword}
               onChangeText={text => setConfirmpassword(text)}
               onBlur={validateConfirmPassword}
-              style={{height: 47, width: '85%', marginLeft: 10}}></TextInput>
+              style={{
+                height: verticalScale(43),
+                width: horizontalScale(240),
+                // borderWidth: 2,
+                marginLeft: horizontalScale(10),
+              }}></TextInput>
           </View>
           {confirmpasswordError ? (
             <Text
-              style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
+              style={{
+                color: 'red',
+                fontSize: moderateScale(12.5),
+                marginTop: verticalScale(3),
+                marginLeft: horizontalScale(5),
+              }}>
               {confirmpasswordError}
             </Text>
           ) : null}
 
           <Text
             style={{
-              fontSize: 15,
-              marginTop: 10,
+              fontSize: moderateScale(14),
+              marginTop: verticalScale(10),
               fontWeight: '400',
               color: 'black',
             }}>
@@ -489,16 +558,19 @@ const SignupScreen = props => {
 
           <View
             style={{
-              marginTop: 10,
+              marginTop: verticalScale(10),
               flexDirection: 'row',
               borderWidth: 3,
-              borderRadius: 8,
+              borderRadius: moderateScale(8),
               borderColor: '#ccc',
             }}>
             <Icon6
-              style={{marginTop: 12, marginLeft: 5}}
+              style={{
+                marginTop: verticalScale(10.5),
+                marginLeft: horizontalScale(6),
+              }}
               name={'phone'}
-              size={24}
+              size={23}
               color={'grey'}></Icon6>
             <TextInput
               keyboardType={'numeric'}
@@ -506,19 +578,29 @@ const SignupScreen = props => {
               onChangeText={text => setPhonenumber(text)}
               maxLength={10}
               onBlur={validatePhoneNumber}
-              style={{height: 47, width: '85%', marginLeft: 10}}></TextInput>
+              style={{
+                height: verticalScale(43),
+                width: horizontalScale(240),
+                // borderWidth: 2,
+                marginLeft: horizontalScale(10),
+              }}></TextInput>
           </View>
           {phonenumberError ? (
             <Text
-              style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
+              style={{
+                color: 'red',
+                fontSize: moderateScale(12.5),
+                marginTop: verticalScale(3),
+                marginLeft: horizontalScale(5),
+              }}>
               {phonenumberError}
             </Text>
           ) : null}
 
           <Text
             style={{
-              fontSize: 15,
-              marginTop: 10,
+              fontSize: moderateScale(14),
+              marginTop: verticalScale(10),
               fontWeight: '400',
               color: 'black',
             }}>
@@ -529,7 +611,7 @@ const SignupScreen = props => {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-evenly',
-              marginTop: 10,
+              marginTop: verticalScale(10),
             }}>
             <RadioButton
               value="M"
@@ -539,8 +621,8 @@ const SignupScreen = props => {
               }}></RadioButton>
             <Text
               style={{
-                fontSize: 15,
-                marginTop: 5,
+                fontSize: moderateScale(14),
+                marginTop: verticalScale(5),
                 fontWeight: '400',
                 color: 'black',
               }}>
@@ -554,8 +636,8 @@ const SignupScreen = props => {
               }}></RadioButton>
             <Text
               style={{
-                fontSize: 15,
-                marginTop: 5,
+                fontSize: moderateScale(14),
+                marginTop: verticalScale(5),
                 fontWeight: '400',
                 color: 'black',
               }}>
@@ -564,7 +646,12 @@ const SignupScreen = props => {
           </View>
           {genderError ? (
             <Text
-              style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
+              style={{
+                color: 'red',
+                fontSize: moderateScale(12.5),
+                marginTop: verticalScale(3),
+                marginLeft: horizontalScale(5),
+              }}>
               {genderError}
             </Text>
           ) : null}
@@ -573,35 +660,44 @@ const SignupScreen = props => {
             onPress={handleRegister}
             style={{
               backgroundColor: '#2E6BC6',
-              marginTop: 25,
-              marginHorizontal: 70,
-              borderRadius: 10,
-              padding: 6,
+              marginTop: verticalScale(25),
+              marginHorizontal: horizontalScale(98),
+              borderRadius: moderateScale(10),
+              padding: verticalScale(4),
             }}>
             <Text
               style={{
                 textAlign: 'center',
-                fontSize: 20,
+                fontSize: moderateScale(17.5),
                 color: 'white',
                 fontFamily: 'RobotoMono-SemiBold',
+                padding: verticalScale(4),
               }}>
               Register
             </Text>
           </TouchableOpacity>
 
           <View
-            style={{flexDirection: 'row', alignSelf: 'center', marginTop: 20}}>
-            <Text style={{fontSize: 15, fontFamily: 'RobotoMono-SemiBold'}}>
+            style={{
+              flexDirection: 'row',
+              alignSelf: 'center',
+              marginTop: verticalScale(20),
+            }}>
+            <Text
+              style={{
+                fontSize: moderateScale(14),
+                fontFamily: 'RobotoMono-SemiBold',
+              }}>
               Already have an account?
             </Text>
             <TouchableOpacity
               onPress={() => props.navigation.navigate('Login')}>
               <Text
                 style={{
-                  fontSize: 15,
-                  marginLeft: 10,
+                  fontSize: moderateScale(14),
+                  marginLeft: horizontalScale(10),
                   fontFamily: 'RobotoMono-SemiBold',
-                  color: 'grey',
+                  color: 'black',
                 }}>
                 Sign In
               </Text>

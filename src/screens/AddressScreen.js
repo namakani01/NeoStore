@@ -6,14 +6,18 @@ import {RadioButton} from 'react-native-paper';
 import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
 import {deleteAddress} from '../redux/reducer';
+import {
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from '../assests/styles/Metrics';
 
 const AddressScreen = props => {
-  // console.log('Props', props.route.params.total);
+  const cartTotal = useSelector(state => state.cartTotal.cartTotal);
 
-  const [checked, setChecked] = useState();
   const dispatch = useDispatch();
 
-  console.log(checked);
+  const [checked, setChecked] = useState();
 
   const data = useSelector(state => state);
   // console.log('data is', data);
@@ -22,19 +26,38 @@ const AddressScreen = props => {
     dispatch(deleteAddress(id));
   };
 
+  const handleProceedToCheckout = () => {
+    if (checked) {
+      const selectedAddress = data.address.find(item => item.id === checked);
+      props.navigation.navigate('checkout', {selectedAddress});
+    } else {
+      alert('Please select an address');
+    }
+  };
+
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       {data.address.length === 0 ? (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text style={{fontSize: 17, color: 'gray'}}>
+          <Text style={{fontSize: moderateScale(15), color: 'black'}}>
             Your Address List is Empty
           </Text>
-          <Text style={{fontSize: 17, color: 'gray', marginTop: 10}}>
+          <Text
+            style={{
+              fontSize: moderateScale(15),
+              color: 'black',
+              marginTop: 10,
+            }}>
             Please add a Address by clicking the + button.
           </Text>
           <Image
-            style={{height: 250, width: 250}}
-            source={require('../assests/images/empty-cart.png')}></Image>
+            style={{
+              height: verticalScale(85),
+              width: horizontalScale(85),
+              marginTop: verticalScale(20),
+            }}
+            resizeMode="contain"
+            source={require('../assests/images/pin.png')}></Image>
         </View>
       ) : (
         <>
@@ -44,11 +67,11 @@ const AddressScreen = props => {
               <View
                 style={{
                   borderWidth: 1,
-                  height: 110,
-                  width: 375,
-                  marginTop: 25,
+                  height: verticalScale(100),
+                  width: horizontalScale(320),
+                  marginTop: verticalScale(25),
                   alignSelf: 'center',
-                  borderRadius: 12,
+                  borderRadius: moderateScale(10),
                   backgroundColor: 'white',
                   borderColor: '#ddd',
                   shadowColor: '#000',
@@ -61,7 +84,7 @@ const AddressScreen = props => {
                   style={{
                     flexDirection: 'row',
                     justifyContent: 'space-around',
-                    marginTop: 10,
+                    marginTop: verticalScale(10),
                   }}>
                   <RadioButton
                     color="#2E6BC6"
@@ -71,15 +94,18 @@ const AddressScreen = props => {
                       setChecked(item.id);
                     }}></RadioButton>
                   <Text
-                    style={{textAlign: 'center', fontSize: 16, color: 'black'}}>
-                    {item.checked}
+                    style={{
+                      textAlign: 'center',
+                      fontSize: moderateScale(15),
+                      color: 'black',
+                      marginTop: verticalScale(3),
+                    }}>
+                    {item.addresstype}
                   </Text>
 
                   <TouchableOpacity
-                    style={{marginLeft: 150}}
-                    onPress={() =>
-                      props.navigation.navigate('Add_Address', {item})
-                    }>
+                    style={{marginLeft: horizontalScale(100)}}
+                    onPress={() => props.navigation.navigate('Add_Address')}>
                     <Icon1 name="edit" size={20}></Icon1>
                   </TouchableOpacity>
 
@@ -89,9 +115,10 @@ const AddressScreen = props => {
                 </View>
                 <Text
                   style={{
-                    fontSize: 16,
-                    alignSelf: 'center',
-                    marginTop: 5,
+                    fontSize: moderateScale(15),
+                    textAlign: 'left',
+                    marginLeft: horizontalScale(30),
+                    marginTop: verticalScale(8),
                   }}>{`${item.houseno},${item.street},${item.city},${item.state}.${item.pincode}`}</Text>
               </View>
             )}></FlatList>
@@ -99,59 +126,69 @@ const AddressScreen = props => {
           <View
             style={{
               borderColor: '#ccc',
-              borderWidth: 3,
-              justifyContent: 'flex-end',
-              marginHorizontal: 10,
+              borderWidth: 2,
+              borderRadius: moderateScale(8),
+              backgroundColor: '#F0F4F7',
+              paddingVertical: verticalScale(10),
+              paddingHorizontal: horizontalScale(15),
+              marginHorizontal: horizontalScale(10),
+              marginBottom: verticalScale(10),
             }}>
-            <View style={{marginLeft: 15}}>
-              <Text style={{fontSize: 20, fontWeight: '500', color: 'black'}}>
-                Cart Totals
-              </Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginRight: 15,
-                }}>
-                <Text
-                  style={{
-                    marginTop: 14,
-                    fontSize: 17,
-                    fontWeight: '500',
-                    color: 'black',
-                  }}>
-                  Total
-                </Text>
-                <Text
-                  style={{
-                    marginTop: 14,
-                    fontSize: 17,
-                    fontWeight: '500',
-                    color: 'black',
-                  }}>
-                  {`₹${props.route.params.total}`}
-                </Text>
-              </View>
+            <Text
+              style={{
+                fontSize: moderateScale(18),
+                fontWeight: '500',
+                color: 'black',
+              }}>
+              Cart Totals
+            </Text>
 
-              <TouchableOpacity
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginRight: horizontalScale(10),
+                marginTop: verticalScale(10),
+              }}>
+              <Text
                 style={{
-                  backgroundColor: '#2E6BC6',
-                  marginTop: 24,
-                  marginHorizontal: 50,
-                  marginBottom: 10,
-                  borderRadius: 7,
+                  fontSize: moderateScale(15.9),
+                  fontWeight: '400',
+                  color: 'black',
                 }}>
-                <Text
-                  style={{
-                    color: 'white',
-                    fontSize: 19,
-                    textAlign: 'center',
-                    padding: 10,
-                  }}>
-                  Proceed
-                </Text>
-              </TouchableOpacity>
+                Total
+              </Text>
+
+              <Text
+                style={{
+                  fontSize: moderateScale(18),
+                  fontWeight: 'bold',
+                  color: '#2E6BC6',
+                }}>
+                {`₹${cartTotal}`}
+              </Text>
             </View>
+
+            <TouchableOpacity
+              onPress={handleProceedToCheckout}
+              style={{
+                backgroundColor: '#2E6BC6',
+                marginTop: verticalScale(20),
+                marginHorizontal: horizontalScale(50),
+                marginBottom: verticalScale(10),
+                borderRadius: moderateScale(7),
+                paddingVertical: verticalScale(10),
+              }}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: moderateScale(14),
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                }}>
+                PROCEED
+              </Text>
+            </TouchableOpacity>
           </View>
         </>
       )}

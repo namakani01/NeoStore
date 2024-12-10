@@ -1,7 +1,19 @@
-import {View, Text, TextInput, TouchableOpacity, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  StyleSheet,
+} from 'react-native';
 import React, {useState} from 'react';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/Fontisto';
+import {
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from '../assests/styles/Metrics';
 
 const ForgotpasswordScreen = () => {
   const [email, setEmail] = useState('');
@@ -69,70 +81,123 @@ const ForgotpasswordScreen = () => {
   }
 
   return (
-    <View style={{marginVertical: 120, marginHorizontal: 13}}>
-      <View style={{flexDirection: 'column'}}>
-        <Text style={{color: '#777777', fontSize: 14}}>
-          Lost your password? Please enter your email address.
-        </Text>
+    <View style={styles.container}>
+      <View style={styles.innercontainer}>
+        <View style={styles.textcontainer}>
+          <Text style={styles.text1style}>
+            Lost your password? Please enter your email address.
+          </Text>
 
-        <Text style={{color: '#777777', fontSize: 14, marginTop: 10}}>
-          You will receive a link to create a new password via email.
-        </Text>
-      </View>
+          <Text style={styles.text2style}>
+            You will receive a link to create a new password via email.
+          </Text>
+        </View>
 
-      <View style={{flexDirection: 'row', marginTop: 25}}>
-        <Text style={{fontSize: 16, color: 'black', fontWeight: '400'}}>
-          Username or email{' '}
-        </Text>
-        <Text style={{color: 'red', marginLeft: 4, fontSize: 15}}>*</Text>
-      </View>
+        <View style={{flexDirection: 'row', marginTop: verticalScale(25)}}>
+          <Text
+            style={{
+              fontSize: moderateScale(15),
+              color: 'black',
+              fontWeight: '400',
+            }}>
+            Username or email
+          </Text>
+          <Text
+            style={{
+              color: 'red',
+              marginLeft: horizontalScale(4),
+              fontSize: moderateScale(15),
+            }}>
+            *
+          </Text>
+        </View>
 
-      <View
-        style={{
-          marginTop: 10,
-          flexDirection: 'row',
-          borderWidth: 2,
-          borderRadius: 8,
-          borderColor: 'grey',
-        }}>
-        <Icon
-          style={{marginTop: 12, marginLeft: 6}}
-          name={'email'}
-          size={23}
-          color={'grey'}></Icon>
-        <TextInput
-          value={email}
-          onChangeText={text => setEmail(text)}
-          onBlur={validateEmail}
-          style={{height: 47, width: '85%', marginLeft: 10}}></TextInput>
-      </View>
-      {emailError ? (
-        <Text style={{color: 'red', fontSize: 14, marginTop: 3, marginLeft: 5}}>
-          {emailError}
-        </Text>
-      ) : null}
-
-      <TouchableOpacity
-        onPress={handleResetPassword}
-        style={{
-          backgroundColor: '#2E6BC6',
-          marginTop: 25,
-          marginHorizontal: 70,
-          borderRadius: 10,
-          padding: 9,
-        }}>
-        <Text
+        <View
           style={{
-            textAlign: 'center',
-            fontSize: 19,
-            color: 'white',
-            fontFamily: 'RobotoMono-SemiBold',
+            marginTop: verticalScale(10),
+            flexDirection: 'row',
+            borderWidth: 2,
+            borderRadius: moderateScale(8),
+            borderColor: 'grey',
           }}>
-          Reset Password
-        </Text>
-      </TouchableOpacity>
+          <Icon
+            style={{
+              marginTop: verticalScale(12),
+              marginLeft: horizontalScale(8),
+            }}
+            name={'email'}
+            size={21}
+            color={'grey'}></Icon>
+          <TextInput
+            value={email}
+            onChangeText={text => setEmail(text)}
+            onBlur={validateEmail}
+            style={{
+              height: verticalScale(45),
+              width: horizontalScale(220),
+              marginLeft: horizontalScale(10),
+              // borderWidth: 2,
+            }}></TextInput>
+        </View>
+        {emailError ? (
+          <Text
+            style={{
+              color: 'red',
+              fontSize: moderateScale(13.5),
+              marginTop: verticalScale(5),
+              marginLeft: horizontalScale(5),
+            }}>
+            {emailError}
+          </Text>
+        ) : null}
+
+        <TouchableOpacity
+          onPress={handleResetPassword}
+          style={{
+            backgroundColor: '#2E6BC6',
+            marginTop: verticalScale(25),
+            marginHorizontal: horizontalScale(95),
+            borderRadius: moderateScale(10),
+            padding: horizontalScale(8),
+          }}>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: moderateScale(15),
+              color: 'white',
+              fontFamily: 'RobotoMono-SemiBold',
+            }}>
+            Reset Password
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  innercontainer: {
+    flex: 1,
+    justifyContent: 'center',
+    marginHorizontal: horizontalScale(15.5),
+  },
+
+  textcontainer: {flexDirection: 'column'},
+
+  text1style: {
+    color: '#777777',
+    fontSize: moderateScale(14),
+  },
+
+  text2style: {
+    color: '#777777',
+    fontSize: moderateScale(14),
+    marginTop: verticalScale(10),
+  },
+});
 
 export default ForgotpasswordScreen;

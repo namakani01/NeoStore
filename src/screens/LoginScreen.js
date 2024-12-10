@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  StyleSheet,
 } from 'react-native';
 
 import React, {useState} from 'react';
@@ -15,6 +16,11 @@ import Icon2 from 'react-native-vector-icons/FontAwesome';
 import Icon3 from 'react-native-vector-icons/Entypo';
 import axios from 'axios';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import {
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from '../assests/styles/Metrics';
 
 const LoginScreen = props => {
   var emailregex = /[a-zA-Z0-9\.\-_]+[@]+[a-z]+[\.]+[a-z]{2,3}/;
@@ -23,7 +29,7 @@ const LoginScreen = props => {
 
   const [email, setEmail] = useState('Kamal@gmail.com');
   const [password, setPassword] = useState('Nam@9930');
-  const [secure, setSecure] = useState(false);
+  const [secure, setSecure] = useState(true);
 
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -109,190 +115,223 @@ const LoginScreen = props => {
         const accessToken = result?.data?.data?.access_token;
         if (accessToken) {
           await EncryptedStorage.setItem('access_token', accessToken);
-          Alert.alert('Login Sucessfull', 'token stored');
+          Alert.alert('Login Successfull');
           props.navigation.replace('HomeScreen');
         } else {
           Alert.alert('Token not found');
         }
       }
     } catch (error) {
-      if (error.response) {
-        console.log('Error response:', error.response.data);
-
-        if (error.response.status === 401) {
-          Alert.alert('Invalid Email or Password');
-        } else {
-          Alert.alert('Login Failed', 'Please try again later.');
-        }
+      if (error.response && error.response.status === 401) {
+        Alert.alert(
+          'Login Error',
+          'Invalid credentials. Please check your email and password.',
+        );
       } else {
-        console.log('Error message:', error.message);
-        Alert.alert('Login Failed', 'Please try again later.');
+        Alert.alert(
+          'Network Issue',
+          'Unable to connect. Please try again later.',
+        );
       }
     }
   }
 
   return (
-    <SafeAreaView>
-      <View style={{height: 500, marginTop: 100, alignSelf: 'center'}}>
-        <View>
-          <Logo />
-        </View>
+    <SafeAreaView style={styles.conatiner}>
+      <View>
+        <Logo />
+      </View>
 
-        <View style={{flexDirection: 'row', marginTop: 40}}>
-          <Text
-            style={{
-              fontSize: 16,
-              marginLeft: 28,
-              fontWeight: '400',
-              color: 'black',
-            }}>
-            Username or email address
-          </Text>
+      <View style={styles.usernametextconatiner}>
+        <Text style={styles.usernametext}>Username or email address</Text>
 
-          <Text style={{marginLeft: 5, color: 'red', fontSize: 17}}>*</Text>
-        </View>
+        <Text style={styles.usernameandpasswordstar}>*</Text>
+      </View>
 
-        <View
-          style={{
-            marginTop: 10,
-            flexDirection: 'row',
-            borderWidth: 3,
-            borderRadius: 8,
-            borderColor: '#ccc',
-            marginHorizontal: 25,
-          }}>
-          <Icon
-            style={{marginTop: 12, marginLeft: 7}}
-            name="email"
-            size={20}
-            color={'grey'}></Icon>
-          <TextInput
-            value={email}
-            onChangeText={text => setEmail(text)}
-            onBlur={validateEmail}
-            style={{
-              height: 47,
-              width: '85%',
-              marginLeft: 10,
-              color: '#2E6BC6',
-            }}></TextInput>
-        </View>
-        {emailError ? (
-          <Text
-            style={{color: 'red', fontSize: 14, marginTop: 5, marginLeft: 25}}>
-            {emailError}
-          </Text>
-        ) : null}
+      <View style={styles.inputboxcontainer}>
+        <Icon
+          style={styles.lefticonstyle}
+          name="email"
+          size={19.5}
+          color={'grey'}></Icon>
+        <TextInput
+          value={email}
+          onChangeText={text => setEmail(text)}
+          onBlur={validateEmail}
+          style={styles.textinput}></TextInput>
+      </View>
+      {emailError ? <Text style={styles.errorstyle}>{emailError}</Text> : null}
 
-        <View style={{flexDirection: 'row', marginTop: 15}}>
-          <Text
-            style={{
-              fontSize: 16,
-              marginLeft: 28,
-              fontWeight: '400',
-              color: 'black',
-            }}>
-            Password
-          </Text>
+      <View style={styles.passwordtextcontainer}>
+        <Text style={styles.passwordtext}>Password</Text>
 
-          <Text style={{marginLeft: 5, color: 'red', fontSize: 17}}>*</Text>
-        </View>
+        <Text style={styles.usernameandpasswordstar}>*</Text>
+      </View>
 
-        <View
-          style={{
-            marginTop: 10,
-            flexDirection: 'row',
-            borderWidth: 3,
-            borderRadius: 8,
-            borderColor: '#ccc',
-            marginHorizontal: 25,
-          }}>
-          <Icon1
-            style={{marginTop: 12, marginLeft: 7}}
-            name="lock"
-            size={20}
-            color={'grey'}></Icon1>
-          <TextInput
-            value={password}
-            secureTextEntry={secure}
-            onChangeText={text => setPassword(text)}
-            onBlur={validatePassword}
-            style={{
-              height: 47,
-              marginLeft: 10,
-              width: '75%',
-            }}></TextInput>
-          {secure === false ? (
-            <TouchableOpacity
-              style={{marginTop: 13, marginLeft: 10}}
-              onPress={() => setSecure(!secure)}>
-              <Icon2 name={'eye'} size={20} color={'grey'}></Icon2>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              style={{marginTop: 13, marginLeft: 10}}
-              onPress={() => setSecure(!secure)}>
-              <Icon3 name={'eye-with-line'} size={20} color={'grey'}></Icon3>
-            </TouchableOpacity>
-          )}
-        </View>
-        {passwordError ? (
-          <Text
-            style={{color: 'red', fontSize: 14, marginTop: 5, marginLeft: 25}}>
-            {passwordError}
-          </Text>
-        ) : null}
-
-        <TouchableOpacity
-          style={{marginTop: 18, marginLeft: 220}}
-          onPress={() => props.navigation.navigate('Forgot Password')}>
-          <Text style={{fontSize: 15, color: '#2E6BC6'}}>
-            Lost your password?
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={handleLogin}
-          style={{
-            backgroundColor: '#2E6BC6',
-            marginTop: 25,
-            marginHorizontal: 110,
-            borderRadius: 10,
-            padding: 6,
-          }}>
-          <Text
-            style={{
-              textAlign: 'center',
-              fontSize: 17,
-              color: 'white',
-              fontFamily: 'RobotoMono-SemiBold',
-              padding: 4,
-            }}>
-            LOG IN
-          </Text>
-        </TouchableOpacity>
-
-        <View
-          style={{flexDirection: 'row', alignSelf: 'center', marginTop: 25}}>
-          <Text style={{fontSize: 15, fontFamily: 'RobotoMono-SemiBold'}}>
-            Don't have an account?
-          </Text>
+      <View style={styles.inputboxcontainer}>
+        <Icon1
+          style={styles.lefticonstyle}
+          name="lock"
+          size={19.5}
+          color={'grey'}></Icon1>
+        <TextInput
+          value={password}
+          secureTextEntry={secure}
+          onChangeText={text => setPassword(text)}
+          onBlur={validatePassword}
+          style={styles.textinput}></TextInput>
+        {secure === false ? (
           <TouchableOpacity
-            onPress={() => props.navigation.navigate('Register')}>
-            <Text
-              style={{
-                marginLeft: 10,
-                fontSize: 15,
-                fontFamily: 'RobotoMono-SemiBold',
-                color: 'black',
-              }}>
-              Register
-            </Text>
+            style={styles.rightsideicon}
+            onPress={() => setSecure(!secure)}>
+            <Icon2 name={'eye'} size={19.5} color={'grey'}></Icon2>
           </TouchableOpacity>
-        </View>
+        ) : (
+          <TouchableOpacity
+            style={styles.rightsideicon}
+            onPress={() => setSecure(!secure)}>
+            <Icon3 name={'eye-with-line'} size={20} color={'grey'}></Icon3>
+          </TouchableOpacity>
+        )}
+      </View>
+      {passwordError ? (
+        <Text style={styles.errorstyle}>{passwordError}</Text>
+      ) : null}
+
+      <TouchableOpacity
+        style={{
+          marginTop: verticalScale(15),
+          marginLeft: horizontalScale(215),
+        }}
+        onPress={() => props.navigation.navigate('Forgot Password')}>
+        <Text style={{fontSize: moderateScale(14), color: '#2E6BC6'}}>
+          Lost your password?
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={handleLogin} style={styles.buttonconatiner}>
+        <Text style={styles.buttontext}>LOG IN</Text>
+      </TouchableOpacity>
+
+      <View style={styles.registerconatiner}>
+        <Text
+          style={{
+            fontSize: moderateScale(14),
+            fontFamily: 'RobotoMono-SemiBold',
+          }}>
+          Don't have an account?
+        </Text>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Register')}>
+          <Text style={styles.registertext}>Register</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  conatiner: {
+    flex: 1,
+    justifyContent: 'center',
+    // alignItems : 'center'
+    // height: verticalScale(500),
+    // marginTop: verticalScale(100),
+    // backgroundColor: 'red',
+  },
+  usernametextconatiner: {
+    flexDirection: 'row',
+    marginTop: verticalScale(40),
+  },
+
+  usernametext: {
+    fontSize: moderateScale(14.5),
+    marginLeft: horizontalScale(26),
+    fontWeight: '400',
+    color: 'black',
+  },
+
+  usernameandpasswordstar: {
+    marginLeft: horizontalScale(5),
+    color: 'red',
+    fontSize: moderateScale(15.5),
+  },
+
+  passwordtextcontainer: {
+    flexDirection: 'row',
+    marginTop: verticalScale(10),
+  },
+
+  passwordtext: {
+    fontSize: moderateScale(14.5),
+    marginLeft: horizontalScale(28),
+    // marginTop: verticalScale(5),
+    fontWeight: '400',
+    color: 'black',
+  },
+
+  rightsideicon: {
+    marginTop: verticalScale(13.5),
+    marginLeft: horizontalScale(16),
+  },
+
+  inputboxcontainer: {
+    marginTop: verticalScale(10),
+    flexDirection: 'row',
+    borderWidth: 3,
+    borderRadius: moderateScale(8),
+    borderColor: '#ccc',
+    marginHorizontal: horizontalScale(25),
+    // backgroundColor: 'red',
+  },
+
+  lefticonstyle: {
+    marginTop: verticalScale(13),
+    marginLeft: horizontalScale(10),
+  },
+
+  textinput: {
+    height: verticalScale(45),
+    width: horizontalScale(220),
+    marginLeft: horizontalScale(10),
+    // borderWidth: 2,
+  },
+
+  errorstyle: {
+    color: 'red',
+    fontSize: moderateScale(12.5),
+    marginTop: verticalScale(5),
+    marginLeft: horizontalScale(26),
+  },
+
+  buttonconatiner: {
+    backgroundColor: '#2E6BC6',
+    // backgroundColor : 'yellow',
+    marginTop: verticalScale(25),
+    marginHorizontal: horizontalScale(135),
+    borderRadius: moderateScale(10),
+    padding: verticalScale(5),
+  },
+
+  buttontext: {
+    textAlign: 'center',
+    fontSize: moderateScale(15),
+    color: 'white',
+    fontFamily: 'RobotoMono-SemiBold',
+    padding: verticalScale(4),
+  },
+
+  registerconatiner: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    marginTop: verticalScale(15),
+  },
+
+  registertext: {
+    marginLeft: horizontalScale(10),
+    fontSize: moderateScale(14),
+    fontFamily: 'RobotoMono-SemiBold',
+    color: 'black',
+  },
+});
 
 export default LoginScreen;
